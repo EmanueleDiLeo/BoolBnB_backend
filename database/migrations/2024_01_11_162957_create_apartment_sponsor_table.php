@@ -23,6 +23,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('sponsors')
                 ->onDelete('cascade');
+
+            $table->date('end_date')->nullable();
         });
     }
 
