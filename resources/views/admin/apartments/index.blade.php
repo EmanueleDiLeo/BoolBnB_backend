@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <h1 class="text-center w-100 text-title mb-3">I Tuoi Appartamenti</h1>
+        <a href="{{route('admin.apartments.create')}}" class="btn btn-success">Add</a>
         <div class="row">
             @foreach ($apartments as $apartment)
             <div class="col-4 my-3">
