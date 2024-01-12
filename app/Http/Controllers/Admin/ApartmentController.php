@@ -37,9 +37,9 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Apartment $id)
+    public function show($id)
     {
-        // $apartment = Apartment::where
+        $apartment = Apartment::where('id', $id)->where('user_id', Auth::id())->first();
         return view('admin.apartments.show', compact('apartment'));
     }
 

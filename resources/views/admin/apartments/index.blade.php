@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h1 class="text-center w-100 text-title mb-3">I Tuoi Appartamenti</h1>
         <div class="row">
             @foreach ($apartments as $apartment)
             <div class="col-4 my-3">
@@ -12,7 +13,7 @@
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                       <a href="{{route('admin.apartments.show', $apartment)}}" class="btn btn-success">Info</a>
                     </div>
-                  </div>
+                </div>
             </div>
             @endforeach
         </div>

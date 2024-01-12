@@ -1,1 +1,49 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+header{
+    height: 60px;
+    padding: 0 30px;
+    border-bottom: 1px solid #F1EB90;
+    background-color: #EC8F5E;
+
+    ul{
+        list-style: none;
+        // padding-left: 0;
+        li{
+            padding: 10px 0;
+            a{
+                color: white;
+                text-decoration: none;
+                &:hover{
+                    border-bottom: 1px solid white;
+                    // display: inline-block;
+                    // width: 100%;
+                }
+                &.active{
+                    border-bottom: 3px solid white;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+}
+
+body{
+    background-color: #F3B664;
+    .log-ok{
+        color: #9FBB73;
+    }
+    .text-title{
+        color:white;
+    }
+    .bg-top-guest{
+        background-color: #EC8F5E;
+        a{
+            color: white;
+            text-decoration: none;
+            &:hover{
+                color:  white;
+            }
+        }
+    }
+}
