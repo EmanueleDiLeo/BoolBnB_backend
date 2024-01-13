@@ -85,16 +85,30 @@
     <p class="text-danger">La data di creazione è un campo obbligatorio</p>
     @enderror
 
+
     <div class="mb-3">
-      <label for="address" class="form-label">Indirizzo</label>
+      <label for="city" class="form-label">Città</label>
       <input
       type="text"
-      class="@error('address') is-invalid @enderror form-control"
-      id="address"
-      name="address"
-      value="{{old('address', $apartment?->address)}}">
+      class="@error('city') is-invalid @enderror form-control"
+      id="city"
+      name="city"
+      value="{{old('city', $apartment?->address)}}">
     </div>
-    @error('address')
+    @error('city')
+    <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+    @enderror
+
+    <div class="mb-3">
+      <label for="road" class="form-label">Via</label>
+      <input
+      type="text"
+      class="@error('road') is-invalid @enderror form-control"
+      id="road"
+      name="road"
+      value="{{old('road', $apartment?->address)}}">
+    </div>
+    @error('road')
     <p class="text-danger">La data di creazione è un campo obbligatorio</p>
     @enderror
 

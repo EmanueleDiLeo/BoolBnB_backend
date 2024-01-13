@@ -47,6 +47,7 @@ class ApartmentController extends Controller
         $form_data['lon'] = 50.14444;
         $form_data['lat'] = -40.55555;
         $form_data['user_id'] = Auth::id();
+        $form_data['address'] = $form_data['road'].','.$form_data['city'];
 
         if(array_key_exists('image', $form_data)) {
             // da fare update image_name
