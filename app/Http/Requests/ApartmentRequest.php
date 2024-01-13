@@ -28,7 +28,8 @@ class ApartmentRequest extends FormRequest
             "bathroom_number" => "required|numeric|min:1",
             "sq_metres" => "numeric|min:9",
             "img" => "min:4|max:255",
-	        "address" => "required|min:2|max:255",
+	        "city" => "required|min:2|max:255",
+	        "road" => "required|min:2|max:255",
 
         ];
     }
@@ -51,10 +52,12 @@ class ApartmentRequest extends FormRequest
 	        "sq_metres.min" => "ci devono essere almeno :min. mq",
             "img.min" => "L'immagine deve avere almeno :min caratteri.",
 	        "img.max" => "L'immagine deve avere almeno :max caratteri.",
-	        "address.required" => "L'indirizzo è obbligatorio.",
-	        "address.min" => "L'indirizzo deve avere almeno :max caratteri.",
-	        "address.max" => "L'indirizzo deve essere massimo :max caratteri.",
-
+	        "road.required" => "L'indirizzo è obbligatorio.",
+	        "road.min" => "L'indirizzo deve avere almeno :max caratteri.",
+	        "road.max" => "L'indirizzo deve essere massimo :max caratteri.",
+	        "city.required" => "L'indirizzo è obbligatorio.",
+	        "city.min" => "L'indirizzo deve avere almeno :max caratteri.",
+	        "city.max" => "L'indirizzo deve essere massimo :max caratteri.",
         ];
     }
 }
