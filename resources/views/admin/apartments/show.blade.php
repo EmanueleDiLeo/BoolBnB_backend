@@ -13,36 +13,37 @@
             <p>lat: {{$apartment->lat}}</p>
             <p>lon: {{$apartment->lon}}</p>
 
+            <h4>Info appartamento</h4>
             <p>Stanze: {{ $apartment->room_number }}</p>
             <p>Posti letto: {{ $apartment->bed_number }}</p>
             <p>Bagni: {{ $apartment->bathroom_number }}</p>
             <p>MQ: {{ $apartment->sq_metres }}</p>
 
+            <h4>Stato</h4>
             @if ($apartment->visible === 1)
             <p>Pubblico</p>
             @else
             <p>Privato</p>
             @endif
 
-
+            <h4>Servizi</h4>
             <ul>
                 @forelse ( $apartment->services as $service )
                     <li>{{$service->name}}</li>
                 @empty
-                    <p>Nessun Servizio</p>
+                    <li>Nessun Servizio</li>
                 @endforelse
             </ul>
 
+            <h4>Descrizione</h4>
             <p>{{$apartment->description}}</p>
 
-            <h5>I tuoi messaggi</h5>
-
-            @foreach ($apartment->messages as $message)
-                <p></p>
-                <p>inviato da {{ $message->sender_email }} <br>{{ $message->text }}</p>
-            @endforeach
-
-
+            <h4>I tuoi messaggi</h4>
+            @forelse ($apartment->messages as $message)
+                <p>Inviato da: {{ $message->sender_email }} <br>{{ $message->text }}</p>
+            @empty
+                <p>Non hai messaggi</p>
+            @endforelse
 
         </div>
     </div>
