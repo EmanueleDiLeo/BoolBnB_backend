@@ -15,8 +15,7 @@
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $apartment->title }}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
+                            <p class="card-text">{{$apartment->description}}</p>
                             <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-success">Info</a>
                             <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-warning"><i
                                     class="fa-solid fa-pencil"></i></a>

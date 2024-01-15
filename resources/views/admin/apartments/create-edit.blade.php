@@ -124,6 +124,17 @@
                 </div>
             </div>
 
+            <div class="form-floating mb-5">
+                <textarea class="form-control"
+                placeholder="Descrizione"
+                id="description"
+                name="description"
+                style="height: 200px">{{old('description',$apartment?->description)}}</textarea>
+                @error('description')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+
             <button type="submit" class="btn bg-success">{{ $button }}</button>
             <button type="reset" class="btn bg-danger">Annulla</button>
         </form>

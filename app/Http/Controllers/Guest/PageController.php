@@ -9,7 +9,7 @@ use App\Models\Apartment;
 class PageController extends Controller
 {
     public function index(){
-        $apartments = Apartment::all();
+        $apartments = Apartment::where('visible', 1)->get();
         return view('guest.home', compact('apartments'));
     }
 
