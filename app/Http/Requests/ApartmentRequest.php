@@ -27,10 +27,9 @@ class ApartmentRequest extends FormRequest
             "bed_number" => "required|numeric|min:1",
             "bathroom_number" => "required|numeric|min:1",
             "sq_metres" => "numeric|min:9",
-            "img" => "min:4|max:255",
+            "img" => "min:4",
 	        "city" => "required|min:2|max:255",
 	        "road" => "required|min:2|max:255",
-
         ];
     }
 
@@ -51,7 +50,6 @@ class ApartmentRequest extends FormRequest
 	        "sq_metres.numeric" => "Inserisci un valore numerico.",
 	        "sq_metres.min" => "ci devono essere almeno :min. mq",
             "img.min" => "L'immagine deve avere almeno :min caratteri.",
-	        "img.max" => "L'immagine deve avere almeno :max caratteri.",
 	        "road.required" => "L'indirizzo è obbligatorio.",
 	        "road.min" => "L'indirizzo deve avere almeno :max caratteri.",
 	        "road.max" => "L'indirizzo deve essere massimo :max caratteri.",

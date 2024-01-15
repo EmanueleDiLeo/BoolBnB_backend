@@ -14,7 +14,7 @@
             </ul>
         </div>
 @endif
-<form action="{{$route}}" method="POST" class="my-5">
+<form action="{{$route}}" method="POST" class="my-5" enctype='multipart/form-data'>
     @csrf
     @method($method)
 
@@ -122,9 +122,9 @@
           onchange="showImage(event)"
           value="{{ old('img', $apartment?->img) }}"
         >
-        @error('img')
+        {{-- @error('img')
             <p class="text-danger">{{ $img }}</p>
-        @enderror
+        @enderror --}}
         <img id="thumb" width="150" onerror="this.src='/img/placeholder2.png'"  src="{{ asset('storage/' . $apartment?->img) }}" />
     </div>
 
