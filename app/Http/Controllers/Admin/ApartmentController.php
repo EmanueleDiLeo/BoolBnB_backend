@@ -63,7 +63,10 @@ class ApartmentController extends Controller
         $form_data['lat'] = $lat;
         $form_data['lon'] = $lon;
 
-        dd($form_data);
+        if (empty($form_data['visible'])) {
+            $form_data['visible'] = 0;
+        }
+
 
         $data = request()->validate([
             'img' => 'required|file|mimes:jpeg,jpg,png,webp'
@@ -136,7 +139,13 @@ class ApartmentController extends Controller
             $form_data['img'] = Storage::put('uploads', $form_data['img']);
         }
 
+        if (empty($form_data['visible'])) {
+            $form_data['visible'] = 0;
+        }
+
         $form_data['address'] = $form_data['road'] . ',' . $form_data['city'];
+
+
 
         if ($form_data['address'] != $apartment->address) {
             $link1 = 'https://api.tomtom.com/search/2/geocode/';

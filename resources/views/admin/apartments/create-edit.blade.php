@@ -98,7 +98,8 @@
 
             <div class="mb-3">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="visible" id="visible" value="0">
+                    <input class="form-check-input" type="checkbox" name="visible" id="visible" value="1"
+                        @if ($visible == 1) checked @endif>
                     <label class="form-check-label" for="visible">
                         Visibile
                     </label>
