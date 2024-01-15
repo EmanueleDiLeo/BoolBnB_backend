@@ -34,7 +34,10 @@ class ApartmentController extends Controller
         $button = 'Crea';
         $services = Service::all();
         $apartment = null;
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment'));
+        $city = null;
+        $road = null;
+        $visible = 0;
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible'));
     }
 
     /**
@@ -47,7 +50,6 @@ class ApartmentController extends Controller
         $form_data['slug'] = Helper::generateSlug($form_data['title'], Apartment::class);
         $form_data['user_id'] = Auth::id();
         $form_data['address'] = $form_data['road'] . ',' . $form_data['city'];
-
         $link1 = 'https://api.tomtom.com/search/2/geocode/';
         $link2 = '.json?countrySet=IT&key=mqY8yECF75lXPuk7LVSI3bFjFtyEAbEX';
 
@@ -60,6 +62,8 @@ class ApartmentController extends Controller
 
         $form_data['lat'] = $lat;
         $form_data['lon'] = $lon;
+
+        dd($form_data);
 
         $data = request()->validate([
             'img' => 'required|file|mimes:jpeg,jpg,png,webp'
@@ -91,24 +95,86 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Apartment $apartment)
     {
-        //
+        $title  = 'Modifica appartamento';
+        $method = 'PUT';
+        $route = route('admin.apartments.update', $apartment);
+        $button = 'Modifica';
+        $separated_address = explode(',', $apartment->address);
+        $visible = $apartment->visible;
+        $road = $separated_address[0];
+        $city = $separated_address[1];
+
+        $services = Service::all();
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $form_data = $request->all();
+        if ($form_data['title'] != $apartment->title) {
+            $form_data['slug'] = Helper::generateSlug($form_data['title'], Apartment::class);
+        } else {
+            $form_data['slug'] = $apartment->slug;
+        }
+
+
+        if (array_key_exists('img', $form_data)) {
+
+            if ($apartment->image) {
+
+                Storage::disk('public')->delete($apartment->img);
+            }
+
+
+            $form_data['img_name'] = $request->file('img')->getClientOriginalName();
+
+            $form_data['img'] = Storage::put('uploads', $form_data['img']);
+        }
+
+        $form_data['address'] = $form_data['road'] . ',' . $form_data['city'];
+
+        if ($form_data['address'] != $apartment->address) {
+            $link1 = 'https://api.tomtom.com/search/2/geocode/';
+            $link2 = '.json?countrySet=IT&key=mqY8yECF75lXPuk7LVSI3bFjFtyEAbEX';
+
+            $response = Http::get($link1 . $form_data['address'] . $link2);
+
+            $data = $response->json('results')[0];
+
+            $lat = $data['position']['lat'];
+            $lon = $data['position']['lon'];
+
+            $form_data['lat'] = $lat;
+            $form_data['lon'] = $lon;
+        }
+
+        $apartment->update($form_data);
+
+        if (array_key_exists('services', $form_data)) {
+            $apartment->services()->sync($form_data['services']);
+        } else {
+            $apartment->services()->detach();
+        }
+
+
+        return redirect()->route('admin.apartments.show', $apartment);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        if ($apartment->img) {
+            Storage::disk('public')->delete($apartment->img);
+        }
+
+        $apartment->delete();
+        return redirect()->route('admin.apartments.index')->with('success', 'This apartment has been deleted');
     }
 }
