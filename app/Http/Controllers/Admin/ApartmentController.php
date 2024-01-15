@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ApartmentRequest;
 use App\Functions\Helper;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -44,10 +45,21 @@ class ApartmentController extends Controller
         $form_data = $request->all();
 
         $form_data['slug'] = Helper::generateSlug($form_data['title'], Apartment::class);
-        $form_data['lon'] = 50.14444;
-        $form_data['lat'] = -40.55555;
         $form_data['user_id'] = Auth::id();
         $form_data['address'] = $form_data['road'] . ',' . $form_data['city'];
+
+        $link1 = 'https://api.tomtom.com/search/2/geocode/';
+        $link2 = '.json?countrySet=IT&key=mqY8yECF75lXPuk7LVSI3bFjFtyEAbEX';
+
+        $response = Http::get($link1 . $form_data['address'] . $link2);
+
+        $data = $response->json('results')[0];
+
+        $lat = $data['position']['lat'];
+        $lon = $data['position']['lon'];
+
+        $form_data['lat'] = $lat;
+        $form_data['lon'] = $lon;
 
         $data = request()->validate([
             'img' => 'required|file|mimes:jpeg,jpg,png,webp'
