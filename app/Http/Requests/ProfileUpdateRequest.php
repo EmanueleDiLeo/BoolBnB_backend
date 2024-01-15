@@ -20,4 +20,12 @@ class ProfileUpdateRequest extends FormRequest
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "name.required" => "Il nome è un campo obbligatorio.",
+            "name.max" => "Il nome deve essere massimo :max caratteri",
+        ];
+    }
 }
