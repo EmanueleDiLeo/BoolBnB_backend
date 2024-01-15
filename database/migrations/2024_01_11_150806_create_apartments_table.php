@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger('bathroom_number');
             $table->smallInteger('sq_metres')->nullable();
             $table->string('img', 255)->nullable();
+            $table->string('img_name', 255)->nullable();
             $table->string('address', 255);
             $table->decimal('lon', $precision = 11, $scale = 8);
             $table->decimal('lat', $precision = 11, $scale = 8);
