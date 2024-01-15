@@ -18,6 +18,17 @@
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                                 the card's content.</p>
                             <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-success">Info</a>
+                            <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-warning"><i
+                                    class="fa-solid fa-pencil"></i></a>
+                            <form class="d-inline-block" action={{ route('admin.apartments.destroy', $apartment) }}
+                                method="POST" onsubmit="return confirm('Confermi di voler eliminare l appartamento?')">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
