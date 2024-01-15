@@ -18,6 +18,7 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
     <div id="app">
 
 
+
         <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-top-guest">
             <div class="container">
 
@@ -52,9 +53,9 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('dashboard') }}">{{__('Dashboard')}}</a>
-                                <a class="dropdown-item" href="{{ url('profile') }}">{{__('Profile')}}</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item text-black" href="{{ route('admin.home') }}">{{__('Dashboard')}}</a>
+                                <a class="dropdown-item text-black" href="{{ url('profile') }}">{{__('Profile')}}</a>
+                                <a class="dropdown-item text-black" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
