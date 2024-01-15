@@ -47,24 +47,24 @@ class ApartmentController extends Controller
         $form_data['lon'] = 50.14444;
         $form_data['lat'] = -40.55555;
         $form_data['user_id'] = Auth::id();
-        $form_data['address'] = $form_data['road'].','.$form_data['city'];
+        $form_data['address'] = $form_data['road'] . ',' . $form_data['city'];
 
         $data = request()->validate([
-            'img' => 'required|file|mimes:jpeg,jpg,png'
+            'img' => 'required|file|mimes:jpeg,jpg,png,webp'
         ]);
 
-        if(array_key_exists('img', $form_data)) {
+        if (array_key_exists('img', $form_data)) {
             $form_data['img_name'] = $request->file('img')->getClientOriginalName();
-            $form_data['img'] = Storage::put('uploads/', $form_data['img']);
+            $form_data['img'] = Storage::put('uploads', $form_data['img']);
         }
 
-
+        // dd($form_data);
         $new_apartment = Apartment::create($form_data);
-        if(array_key_exists('services', $form_data)){
+        if (array_key_exists('services', $form_data)) {
             $new_apartment->services()->attach($form_data['services']);
         }
 
-        return redirect()->route('admin.apartments.show' , $new_apartment);
+        return redirect()->route('admin.apartments.show', $new_apartment);
     }
 
     /**

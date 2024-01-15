@@ -9,10 +9,13 @@
             @foreach ($apartments as $apartment)
                 <div class="col-4 my-3">
                     <div class="card h-100">
-                        <img src="{{ asset('storage/' . $apartment->img) }}" alt="{{$apartment->title}}">
-                        <img src="{{$apartment->img}}" alt="{{$apartment->title}}">
+                        @if (Str::contains($apartment->img, ['https://']))
+                            <img src="{{ $apartment->img }}" alt="{{ $apartment->title }}">
+                        @else
+                            <img src="{{ asset('storage/' . $apartment->img) }}" alt="{{ $apartment->title }}">
+                        @endif
                         <div class="card-body ">
-                            <h5 class="card-title">{{$apartment->title}}</h5>
+                            <h5 class="card-title">{{ $apartment->title }}</h5>
                             <a href="#" class="btn btn-success">Info</a>
                         </div>
                     </div>
