@@ -65,8 +65,8 @@
 
                             <div class="mb-4 row">
                                 <label for="date_birth"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}
-                                    <p>(opzionale)</p>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita*') }}
+
                                 </label>
 
                                 <div class="col-md-6">
@@ -79,9 +79,6 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    @if (session('danger'))
-                                        <p class="text-danger">{{ session('danger') }}</p>
-                                    @endif
                                 </div>
                             </div>
 
