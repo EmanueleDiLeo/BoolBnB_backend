@@ -40,7 +40,7 @@
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                             </form>
-                        {{-- /button delete------------------------------- --}}
+                            {{-- /button delete------------------------------- --}}
 
                         </div>
                     </div>

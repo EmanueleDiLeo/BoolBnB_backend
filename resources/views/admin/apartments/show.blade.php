@@ -12,6 +12,24 @@
 
             <div class="card-body">
                 <h4>{{ $apartment->title }}</h4>
+
+                <div class=" float-end">
+                    {{-- button edit------------------------------- --}}
+                    <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-warning">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
+                    {{-- /button edit------------------------------- --}}
+                    {{-- button delete------------------------------- --}}
+                    <form class="d-inline-block" action={{ route('admin.apartments.destroy', $apartment) }}
+                    method="POST" onsubmit="return confirm('Confermi di voler eliminare l appartamento?')">
+                    @csrf
+                    @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </form>
+                    {{-- /button delete------------------------------- --}}
+                </div>
                 <p>Indirizzo: {{ $apartment->address }}</p>
                 <p>lat: {{$apartment->lat}}</p>
                 <p>lon: {{$apartment->lon}}</p>

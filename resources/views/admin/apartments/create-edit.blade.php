@@ -37,9 +37,9 @@
             <label for="room_number" class="form-label">Numero stanze*</label>
             <input type="number" class="@error('room_number') is-invalid @enderror form-control" id="room_number"
             name="room_number" value="{{ old('room_number', $apartment?->room_number) }}" required min="1">
+            <div class="invalid-feedback">questo campo è obbligatorio</div>
         </div>
 
-        <div class="text-danger errore">questo campo è obbligatorio</div>
 
         @error('room_number')
             <p class="text-danger">La data di creazione è un campo obbligatorio</p>
@@ -52,9 +52,9 @@
             <label for="bed_number" class="form-label">Posti letto*</label>
             <input type="number" class="@error('bed_number') is-invalid @enderror form-control" id="bed_number"
                 name="bed_number" value="{{ old('bed_number', $apartment?->bed_number) }}" required min="1">
+            <div class="invalid-feedback">questo campo è obbligatorio</div>
         </div>
 
-        <div class="text-danger errore">questo campo è obbligatorio</div>
 
         @error('bed_number')
             <p class="text-danger">La data di creazione è un campo obbligatorio</p>
@@ -67,9 +67,9 @@
             <input type="number" class="@error('bathroom_number') is-invalid @enderror form-control"
                 id="bathroom_number" name="bathroom_number"
                 value="{{ old('bathroom_number', $apartment?->bathroom_number) }}" required min="1">
+            <div class=" invalid-feedback">questo campo è obbligatorio</div>
         </div>
 
-        <div class="text-danger errore">questo campo è obbligatorio</div>
 
         @error('bathroom_number')
             <p class="text-danger">La data di creazione è un campo obbligatorio</p>
@@ -81,9 +81,9 @@
             <label for="sq_metres" class="form-label">Metri quadrati*</label>
             <input type="number" class="@error('sq_metres') is-invalid @enderror form-control" id="sq_metres"
                 name="sq_metres" value="{{ old('sq_metres', $apartment?->sq_metres) }}" required min="9">
+            <div class=" invalid-feedback">questo campo è obbligatorio</div>
         </div>
 
-        <div class="text-danger errore">questo campo è obbligatorio</div>
 
         @error('sq_metres')
             <p class="text-danger">La data di creazione è un campo obbligatorio</p>
@@ -91,29 +91,24 @@
 {{-- /sq metres section--------------------------------------- --}}
 
 {{-- address section--------------------------------------- --}}
-        <div class="mb-3">
-            <label for="city" class="form-label">Città*</label>
-            <input autoComplete="home city" type="text" class="@error('city') is-invalid @enderror form-control"
-                id="city" name="city" value="{{ old('city', $city) }}" required>
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label for="city" class="form-label">Città</label>
+                <input type="text" class="@error('city') is-invalid @enderror form-control"
+                    id="city" name="city" value="{{ old('city', $city) }}">
+            </div>
+            @error('city')
+                <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+            @enderror
+
+            <div class="mb-3 col-6">
+                <label for="road" class="form-label">Via</label>
+                <input type="text" class="@error('road') is-invalid @enderror form-control" id="road" name="road" value="{{ old('road', $road) }}">
+            </div>
+            @error('road')
+                <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+            @enderror
         </div>
-
-        <div class="text-danger errore">questo campo è obbligatorio</div>
-
-        @error('city')
-            <p class="text-danger">La data di creazione è un campo obbligatorio</p>
-        @enderror
-
-        <div class="mb-3">
-            <label for="road" class="form-label">Via*</label>
-            <input type="text" class="@error('road') is-invalid @enderror form-control" id="road" name="road"
-                value="{{ old('road', $road) }}" required>
-        </div>
-
-        <div class="text-danger errore">questo campo è obbligatorio</div>
-
-        @error('road')
-            <p class="text-danger">La data di creazione è un campo obbligatorio</p>
-        @enderror
 {{-- /address section--------------------------------------- --}}
 
 {{-- image section--------------------------------------- --}}
@@ -122,7 +117,8 @@
             <input id="img" class="form-control @error('img') is-invalid @enderror" name="img" type="file"
                 onchange="showUpload(event)" value="{{ old('img', $apartment?->img) }}" required accept="image/jpeg, image/jpg, image/png, image/webp">
 
-                <div class="text-danger errore">questo campo è obbligatorio</div>
+            <div class="invalid-feedback">questo campo è obbligatorio</div>
+            <div class="valid-feedback"></div>
 
             @error('img')
                 <p class="text-danger">{{ $img }}</p>
@@ -142,8 +138,7 @@
 {{-- visible and checkbox services section--------------------------------------- --}}
         <div class="mb-3">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="visible" id="visible" value="1"
-                    @if ($visible == 1) checked @endif>
+                <input class="form-check-input" type="checkbox" name="visible" id="visible" value="1" @if ($visible == 1) checked @endif>
                 <label class="form-check-label" for="visible">
                     Visibile
                 </label>
@@ -157,9 +152,9 @@
                         name="services[] radio-stacked" value="{{ $service->id }} "
                         @if (
                             (!$errors->any() && $apartment?->services->contains($service)) ||
-                                ($errors->any() && in_array($service->id, old('services', [])))) checked @endif required>
+                                ($errors->any() && in_array($service->id, old('services', [])))) checked @endif {{$required}}>
 
-                    <label for="service_{{ $service->id }}" class="customCheckBoxWrapper ciao text-danger">
+                    <label for="service_{{ $service->id }}" class="customCheckBoxWrapper ciao {{$text}}">
                         <div class="customCheckBox">
                             <div class="inner">{{ $service->name }}</div>
                         </div>
@@ -203,6 +198,15 @@
     let serviceGroup = document.querySelectorAll(".ciao");
     let checkedServices = []
 
+    function getCurrentURL () {
+    return window.location.href
+    }
+
+    // Example
+    const url = getCurrentURL()
+
+    console.log(url);
+
     serviceGroup.forEach(service => {
     service.addEventListener('change', function() {
     if (this.checked) {
@@ -214,15 +218,22 @@
         checkedServices.push(service)
         console.log(checkedServices)
     } else {
-        checkedServices.splice(0,1)
-        if(checkedServices.length === 0){
+        if(url == 'http://127.0.0.1:8000/admin/apartments/create' && checkedServices.length === 0){
+            serviceGroup.forEach(service =>{
+                checkedServices.splice(0,1)
+                service.setAttribute("required", '')
+                service.classList.remove('text-success')
+                service.classList.add('text-danger')
+            })
+        } else if (checkedServices.length === 0){
+            checkedServices.push(service)
             serviceGroup.forEach(service =>{
                 service.setAttribute("required", '')
                 service.classList.remove('text-success')
                 service.classList.add('text-danger')
             })
         }
-        console.log(checkedServices)
+
     }
     });
     });
