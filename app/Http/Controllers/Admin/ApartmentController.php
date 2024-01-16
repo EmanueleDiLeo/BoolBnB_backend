@@ -190,6 +190,6 @@ class ApartmentController extends Controller
         }
 
         $apartment->delete();
-        return redirect()->route('admin.apartments.index')->with('success', 'This apartment has been deleted');
+        return redirect()->route('admin.apartments.index')->with('success',  ' Appartamento ' . $apartment->title . ' eliminato con successo');
     }
 }
