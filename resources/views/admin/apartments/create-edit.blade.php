@@ -88,13 +88,20 @@
             <div class="mb-3">
                 <label for="img" class="form-label">Immagine</label>
                 <input id="img" class="form-control @error('img') is-invalid @enderror" name="img" type="file"
-                    onchange="showImage(event)" value="{{ old('img', $apartment?->img) }}">
-                {{-- @error('img')
-            <p class="text-danger">{{ $img }}</p>
-        @enderror --}}
-                <img id="thumb" width="150" onerror="this.src='/img/placeholder2.png'"
+                    onchange="showUpload(event)" value="{{ old('img', $apartment?->img) }}">
+                @error('img')
+                    <p class="text-danger">{{ $img }}</p>
+                @enderror
+                <img id="thumb" width="150" onerror="this.src='/img/placeholder.webp'"
                     src="{{ asset('storage/' . $apartment?->img) }}" />
             </div>
+
+            <script>
+                function showUpload(event) {
+                    const thumb = document.getElementById('thumb');
+                    thumb.src = URL.createObjectURL(event.target.files[0]);
+                }
+            </script>
 
             <div class="mb-3">
                 <div class="form-check">
@@ -110,7 +117,7 @@
                 <div class="customCheckBoxHolder">
                     @foreach ($services as $service)
                         <input type="checkbox" id="service_{{ $service->id }}" class="customCheckBoxInput"
-                            name="services[]" value="{{ $service->id }}"
+                            name="services[]" value="{{ $service->id }} "
                             @if (
                                 (!$errors->any() && $apartment?->services->contains($service)) ||
                                     ($errors->any() && in_array($service->id, old('services', [])))) checked @endif>
@@ -128,8 +135,8 @@
                 <textarea class="form-control"
                 placeholder="Descrizione"
                 id="description"
-                name="description"
-                style="height: 200px">{{old('description',$apartment?->description)}}</textarea>
+                name="description"">
+                {{old('description',$apartment?->description)}}</textarea>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -139,6 +146,17 @@
             <button type="reset" class="btn bg-danger">Annulla</button>
         </form>
     </div>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
+
+
 @endsection
 
 @section('title')
