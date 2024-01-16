@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -21,7 +22,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $text = null;
+        return view('auth.register', compact('text'));
     }
 
     /**
@@ -38,6 +40,13 @@ class RegisteredUserController extends Controller
         //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
         //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
         // ]);
+
+        $now = Carbon::now();
+        $age = $now->diffInYears($request->date_birth);
+        if ($age < 18) {
+            $text = 'Devi essere maggiorenne';
+            return redirect()->route('register')->with('danger', $text);
+        }
 
         $user = User::create([
             'name' => $request->name,
