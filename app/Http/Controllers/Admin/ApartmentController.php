@@ -89,9 +89,12 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        $apartment = Apartment::where('id', $id)->where('user_id', Auth::id())->first();
+        if ($apartment->user_id !== Auth::id()) {
+            abort('404');
+        };
+        $apartment = Apartment::where('id', $apartment->id)->where('user_id', Auth::id())->first();
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -100,6 +103,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        if ($apartment->user_id !== Auth::id()) {
+            abort('404');
+        };
         $title  = 'Modifica appartamento';
         $method = 'PUT';
         $route = route('admin.apartments.update', $apartment);
