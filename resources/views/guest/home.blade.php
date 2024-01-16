@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $apartment->title }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ $apartment->address }}.</h6>
-                            <p style="font-size: .7rem;">{{ $apartment->description }}</p>
+                            <p style="font-size: .7rem;">{!! $apartment->description !!}</p>
                             <a href="#" class="btn btn-success">Info</a>
                         </div>
                         {{-- /section description appartment--------------- --}}
