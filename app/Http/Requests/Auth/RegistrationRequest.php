@@ -37,7 +37,9 @@ class RegistrationRequest extends FormRequest
                     $currentDate = Carbon::now();
                     $age = $date_birth->diff($currentDate)->y;
 
-                    if ($age < 18) {
+                    if ($value > $currentDate) {
+                        $fail('Vieni dal futuro?');
+                    } elseif ($age < 18) {
                         $fail('Devi essere maggiorenne!');
                     }
                 },
