@@ -32,6 +32,17 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            "email.required" => "L'email è un campo obbligatorio.",
+            "email.email" => "L'email deve essera valida",
+            "password.required" => "La password è un campo obbligatorio.",
+            'auth.failed' => 'pippo.',
+            'auth.throttle' => 'pluto.',
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -45,7 +56,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Dati inseriti errati.',
             ]);
         }
 
