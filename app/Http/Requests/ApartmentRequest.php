@@ -29,6 +29,7 @@ class ApartmentRequest extends FormRequest
             "sq_metres" => "numeric|min:9",
             "city" => "required|min:2|max:255",
             "road" => "required|min:2|max:255",
+            "services" => "required"
         ];
     }
 
@@ -56,6 +57,7 @@ class ApartmentRequest extends FormRequest
             "city.required" => "L'indirizzo è obbligatorio.",
             "city.min" => "L'indirizzo deve avere almeno :max caratteri.",
             "city.max" => "L'indirizzo deve essere massimo :max caratteri.",
+            "services.required" => "Devi selezionare almeno un servizio.",
         ];
     }
 }
