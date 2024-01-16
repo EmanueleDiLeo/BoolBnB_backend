@@ -69,8 +69,8 @@
 
             <div class="mb-3">
                 <label for="city" class="form-label">Città</label>
-                <input autoComplete="home city" type="text" class="@error('city') is-invalid @enderror form-control" id="city" name="city"
-                    value="{{ old('city', $city) }}">
+                <input autoComplete="home city" type="text" class="@error('city') is-invalid @enderror form-control"
+                    id="city" name="city" value="{{ old('city', $city) }}">
             </div>
             @error('city')
                 <p class="text-danger">La data di creazione è un campo obbligatorio</p>
@@ -132,11 +132,8 @@
             </div>
 
             <div class="form-floating mb-5">
-                <textarea class="form-control"
-                placeholder="Descrizione"
-                id="description"
-                name="description"">
-                {{old('description',$apartment?->description)}}</textarea>
+                <textarea class="form-control" placeholder="Descrizione" id="description" name="description">
+                {{ old('description', $apartment?->description) }}</textarea>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -149,10 +146,10 @@
 
     <script>
         ClassicEditor
-            .create( document.querySelector( '#description' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
 
