@@ -39,7 +39,8 @@ class ApartmentController extends Controller
         $visible = 0;
         $text = 'text-danger';
         $required = 'required';
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required'));
+        $active_services = 0;
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required', 'active_services'));
     }
 
     /**
@@ -118,9 +119,9 @@ class ApartmentController extends Controller
         $city = $separated_address[1];
         $text = 'text-success';
         $required = '';
-
+        $active_services = $apartment->services->count();
         $services = Service::all();
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required'));
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required', 'active_services'));
     }
 
     /**

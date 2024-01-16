@@ -149,7 +149,7 @@
             <div class="customCheckBoxHolder">
                 @foreach ($services as $service)
                     <input type="checkbox" id="service_{{ $service->id }}" class="form-check-input ciao"
-                        name="services[] radio-stacked" value="{{ $service->id }} "
+                        name="services[]" value="{{ $service->id }} "
                         @if (
                             (!$errors->any() && $apartment?->services->contains($service)) ||
                                 ($errors->any() && in_array($service->id, old('services', [])))) checked @endif {{$required}}>
@@ -196,8 +196,9 @@
 <script>
 
     let serviceGroup = document.querySelectorAll(".ciao");
+    let i = {{$active_services}}
     let checkedServices = []
-
+    console.log(i);
     function getCurrentURL () {
     return window.location.href
     }
@@ -207,6 +208,7 @@
 
     console.log(url);
 
+
     serviceGroup.forEach(service => {
     service.addEventListener('change', function() {
     if (this.checked) {
@@ -215,24 +217,18 @@
             service.classList.remove('text-danger')
             service.classList.add('text-success')
         })
-        checkedServices.push(service)
-        console.log(checkedServices)
+        i++
+        console.log(i)
     } else {
-        if(url == 'http://127.0.0.1:8000/admin/apartments/create' && checkedServices.length === 0){
-            serviceGroup.forEach(service =>{
-                checkedServices.splice(0,1)
-                service.setAttribute("required", '')
-                service.classList.remove('text-success')
-                service.classList.add('text-danger')
-            })
-        } else if (checkedServices.length === 0){
-            checkedServices.push(service)
+        i--
+        if(i === 0){
             serviceGroup.forEach(service =>{
                 service.setAttribute("required", '')
                 service.classList.remove('text-success')
                 service.classList.add('text-danger')
             })
         }
+        console.log(i)
 
     }
     });
