@@ -40,7 +40,7 @@
 
                 <h4>Descrizione</h4>
                 @if ($apartment->description)
-                <p>{{$apartment->description}}</p>
+                    <p>{!! $apartment->description !!}</p>
                 @else
                     <p>Nessuna descrizione</p>
                 @endif

@@ -69,7 +69,7 @@
 
             <div class="mb-3">
                 <label for="city" class="form-label">Città</label>
-                <input type="text" class="@error('city') is-invalid @enderror form-control" id="city" name="city"
+                <input autoComplete="home city" type="text" class="@error('city') is-invalid @enderror form-control" id="city" name="city"
                     value="{{ old('city', $city) }}">
             </div>
             @error('city')

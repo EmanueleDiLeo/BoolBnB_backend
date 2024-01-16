@@ -4,6 +4,7 @@
             <ul class="list-unstyled d-flex">
                 <li class="mx-3"><a href="{{ route('admin.home') }}" @class(['active' => Route::is('admin.home')])>Home</a></li>
                 <li><a href="{{route('admin.apartments.index')}}" @class(['active' => Route::is('admin.apartments.index')])>I Tuoi Appartamenti</a></li>
+                <li><a class="mx-3" href="{{route('home')}}" @class(['active' => Route::is('admin.apartments.index')])>Tutti gli appartamenti</a></li>
             </ul>
             <form action="{{route('logout')}}" class="d-flex" role="search" method="POST" >
             @csrf
