@@ -8,10 +8,15 @@ use App\Models\Apartment;
 
 class PageController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $apartments = Apartment::where('visible', 1)->get();
         return view('guest.home', compact('apartments'));
     }
 
-
+    public function searchApartments($tosearch)
+    {
+        $apartments = Apartment::where('title', 'LIKE', '%' . $tosearch . '%')->with('services');
+        return response()->json($apartments);
+    }
 }
