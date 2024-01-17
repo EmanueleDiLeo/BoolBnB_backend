@@ -13,7 +13,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ $route }}" method="POST" class="my-5 was-validated" enctype='multipart/form-data' novalidate>
+        <form action="{{ $route }}" method="POST" class="my-5 was-validated" enctype='multipart/form-data'>
             @csrf
             @method($method)
 
