@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use Carbon\Carbon;
+
 
 class RegisteredUserController extends Controller
 {
@@ -33,20 +33,6 @@ class RegisteredUserController extends Controller
      */
     public function store(RegistrationRequest $request): RedirectResponse
     {
-        // $request->validate([
-        //     'name' => ['required', 'string', 'min:2', 'max:255'],
-        //     'surname' => ['string', 'min:2', 'max:255'],
-        //     'date_birth' => ['date', 'nullable'],
-        //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        // ]);
-
-        $now = Carbon::now();
-        $age = $now->diffInYears($request->date_birth);
-        if ($age < 18) {
-            $text = 'Devi essere maggiorenne';
-            return redirect()->route('register')->with('danger', $text);
-        }
 
         $user = User::create([
             'name' => $request->name,

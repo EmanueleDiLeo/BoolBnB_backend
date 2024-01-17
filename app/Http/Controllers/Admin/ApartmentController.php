@@ -37,7 +37,10 @@ class ApartmentController extends Controller
         $city = null;
         $road = null;
         $visible = 0;
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible'));
+        $text = 'text-danger';
+        $required = 'required';
+        $active_services = 0;
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required', 'active_services'));
     }
 
     /**
@@ -114,9 +117,11 @@ class ApartmentController extends Controller
         $visible = $apartment->visible;
         $road = $separated_address[0];
         $city = $separated_address[1];
-
+        $text = 'text-success';
+        $required = '';
+        $active_services = $apartment->services->count();
         $services = Service::all();
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible'));
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required', 'active_services'));
     }
 
     /**
@@ -190,6 +195,6 @@ class ApartmentController extends Controller
         }
 
         $apartment->delete();
-        return redirect()->route('admin.apartments.index')->with('success', 'This apartment has been deleted');
+        return redirect()->route('admin.apartments.index')->with('success',  ' Appartamento ' . $apartment->title . ' eliminato con successo');
     }
 }

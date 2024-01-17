@@ -5,6 +5,11 @@
         <h1 class="text-center w-100 text-title mb-3">I Tuoi Appartamenti</h1>
         <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">Add</a>
         <div class="row">
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             @foreach ($apartments as $apartment)
                 <div class="col-4 my-3">
                     <div class="card h-100">
@@ -12,7 +17,8 @@
                             @if (Str::contains($apartment->img, ['https://']))
                                 <img src="{{ $apartment->img }}" class="img-fluid w-100" alt="{{ $apartment->title }}">
                             @else
-                                <img src="{{ asset('storage/' . $apartment->img) }}" class="img-fluid w-100" alt="{{ $apartment->title }}">
+                                <img src="{{ asset('storage/' . $apartment->img) }}" class="img-fluid w-100"
+                                    alt="{{ $apartment->title }}">
                             @endif
                         </div>
                         <div class="card-body">
@@ -20,9 +26,9 @@
                             <h6 class="card-subtitle mb-2 text-muted">{{ $apartment->address }}.</h6>
 
                             {{-- button show------------------------------- --}}
-                                <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-success">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </a>
+                            <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-success">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </a>
                             {{-- /button show------------------------------- --}}
 
                             {{-- button edit------------------------------- --}}
@@ -33,14 +39,14 @@
 
                             {{-- button delete------------------------------- --}}
                             <form class="d-inline-block" action={{ route('admin.apartments.destroy', $apartment) }}
-                            method="POST" onsubmit="return confirm('Confermi di voler eliminare l appartamento?')">
-                            @csrf
-                            @method('DELETE')
+                                method="POST" onsubmit="return confirm('Confermi di voler eliminare l appartamento?')">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                             </form>
-                        {{-- /button delete------------------------------- --}}
+                            {{-- /button delete------------------------------- --}}
 
                         </div>
                     </div>

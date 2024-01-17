@@ -5,6 +5,7 @@ namespace App\Http\Requests\Auth;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+use Carbon\Carbon;
 
 
 
@@ -28,8 +29,22 @@ class RegistrationRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:255'],
             'surname' => ['string', 'min:2', 'max:255'],
-            'date_birth' => ['date', 'nullable'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'date_birth' => [
+                'required',
+                'date',
+                function ($attribute, $value, $fail) {
+                    $date_birth = Carbon::parse($value);
+                    $currentDate = Carbon::now();
+                    $age = $date_birth->diff($currentDate)->y;
+
+                    if ($value > $currentDate) {
+                        $fail('Vieni dal futuro?');
+                    } elseif ($age < 18) {
+                        $fail('Devi essere maggiorenne!');
+                    }
+                },
+            ],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
@@ -49,6 +64,7 @@ class RegistrationRequest extends FormRequest
             "email.email" => "L'email deve essera valida",
             "password.required" => "La password è un campo obbligatorio.",
             "password.confirmed" => "La password deve essere uguale.",
+            "date_birth.required" => "La data di nascita è un campo obbligatorio."
         ];
     }
 }
