@@ -52,3 +52,10 @@ body{
     /* editing area */
     min-height: 300px;
 }
+
+.address-result-item {
+    &:hover{
+        cursor: pointer;
+        background-color: #9FBB73;
+    }
+}
