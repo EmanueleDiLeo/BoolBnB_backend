@@ -27,8 +27,7 @@ class ApartmentRequest extends FormRequest
             "bed_number" => "required|numeric|min:1",
             "bathroom_number" => "required|numeric|min:1",
             "sq_metres" => "numeric|min:9",
-            "city" => "required|min:2|max:255",
-            "road" => "required|min:2|max:255",
+            "address" => "required|min:2|max:255",
             "services" => "required"
         ];
     }
@@ -51,12 +50,9 @@ class ApartmentRequest extends FormRequest
             "sq_metres.numeric" => "Inserisci un valore numerico.",
             "sq_metres.min" => "ci devono essere almeno :min. mq",
             "img.min" => "L'immagine deve avere almeno :min caratteri.",
-            "road.required" => "L'indirizzo è obbligatorio.",
-            "road.min" => "L'indirizzo deve avere almeno :max caratteri.",
-            "road.max" => "L'indirizzo deve essere massimo :max caratteri.",
-            "city.required" => "L'indirizzo è obbligatorio.",
-            "city.min" => "L'indirizzo deve avere almeno :max caratteri.",
-            "city.max" => "L'indirizzo deve essere massimo :max caratteri.",
+            "address.required" => "L'indirizzo è obbligatorio.",
+            "address.min" => "L'indirizzo deve avere almeno :max caratteri.",
+            "address.max" => "L'indirizzo deve essere massimo :max caratteri.",
             "services.required" => "Devi selezionare almeno un servizio.",
         ];
     }
