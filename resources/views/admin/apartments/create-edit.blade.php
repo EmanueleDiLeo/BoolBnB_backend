@@ -42,7 +42,7 @@
 
 
         @error('room_number')
-            <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+            <p class="text-danger">Il numero delle stanze è un campo obbligatorio</p>
         @enderror
 {{-- /room number section--------------------------------------- --}}
 
@@ -57,7 +57,7 @@
 
 
         @error('bed_number')
-            <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+            <p class="text-danger">Il numero dei posti letto è un campo obbligatorio</p>
         @enderror
 {{-- /bed number section--------------------------------------- --}}
 
@@ -72,7 +72,7 @@
 
 
         @error('bathroom_number')
-            <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+            <p class="text-danger"> Il numero dei bagni è un campo obbligatorio</p>
         @enderror
 {{-- /bathroom number section--------------------------------------- --}}
 
@@ -86,45 +86,42 @@
 
 
         @error('sq_metres')
-            <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+            <p class="text-danger">Il metraggio è un campo obbligatorio</p>
         @enderror
 {{-- /sq metres section--------------------------------------- --}}
 
 {{-- address section--------------------------------------- --}}
         <div class="row">
-            <div class="mb-3 col-6">
-                <label for="city" class="form-label">Città</label>
-                <input type="text" class="@error('city') is-invalid @enderror form-control"
-                    id="city" name="city" value="{{ old('city', $city) }}">
+            <div class="mb-3">
+                <label for="address" class="form-label ">Indirizzo completo*</label>
+                <input type="text" class="@error('address') is-invalid @enderror form-control"
+                    id="address" name="address" value="{{ old('address', $address) }}" required minlength="3">
+                <div class="invalid-feedback">questo campo è obbligatorio</div>
             </div>
-            @error('city')
-                <p class="text-danger">La data di creazione è un campo obbligatorio</p>
-            @enderror
-
-            <div class="mb-3 col-6">
-                <label for="road" class="form-label">Via</label>
-                <input type="text" class="@error('road') is-invalid @enderror form-control" id="road" name="road" value="{{ old('road', $road) }}">
-            </div>
-            @error('road')
-                <p class="text-danger">La data di creazione è un campo obbligatorio</p>
+            @error('address')
+                <p class="text-danger">L'indirizzo è un campo obbligatorio</p>
             @enderror
         </div>
 {{-- /address section--------------------------------------- --}}
+
+<script>
+
+</script>
 
 {{-- image section--------------------------------------- --}}
         <div class="mb-3">
             <label for="img" class="form-label">Immagine*</label>
             <input id="img" class="form-control @error('img') is-invalid @enderror" name="img" type="file"
-                onchange="showUpload(event)" value="{{ old('img', $apartment?->img) }}" required accept="image/jpeg, image/jpg, image/png, image/webp">
+            onchange="showUpload(event)" value="{{ old('img', $apartment?->img) }}" {{$required}} multiple accept="image/jpeg, image/jpg, image/png, image/webp">
 
-            <div class="invalid-feedback">questo campo è obbligatorio</div>
             <div class="valid-feedback"></div>
 
             @error('img')
-                <p class="text-danger">{{ $img }}</p>
+            <p class="text-danger">{{ $img }}</p>
             @enderror
             <img id="thumb" width="150" onerror="this.src='/img/placeholder.webp'"
-                src="{{ asset('storage/' . $apartment?->img) }}" />
+            src="{{ asset('storage/' . $apartment?->img) }}" />
+            <div class="invalid-feedback">questo campo è obbligatorio</div>
         </div>
 
         <script>
@@ -139,7 +136,7 @@
         <div class="mb-3">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="visible" id="visible" value="1" @if ($visible == 1) checked @endif>
-                <label class="form-check-label" for="visible">
+                <label class="form-check-label text-black" for="visible">
                     Visibile
                 </label>
             </div>

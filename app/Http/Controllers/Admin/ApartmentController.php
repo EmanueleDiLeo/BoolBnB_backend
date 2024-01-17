@@ -34,13 +34,13 @@ class ApartmentController extends Controller
         $button = 'Crea';
         $services = Service::all();
         $apartment = null;
-        $city = null;
-        $road = null;
+        $address = null;
+
         $visible = 0;
         $text = 'text-danger';
         $required = 'required';
         $active_services = 0;
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required', 'active_services'));
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'address', 'visible', 'text', 'required', 'active_services'));
     }
 
     /**
@@ -52,7 +52,6 @@ class ApartmentController extends Controller
 
         $form_data['slug'] = Helper::generateSlug($form_data['title'], Apartment::class);
         $form_data['user_id'] = Auth::id();
-        $form_data['address'] = $form_data['road'] . ',' . $form_data['city'];
         $link1 = 'https://api.tomtom.com/search/2/geocode/';
         $link2 = '.json?countrySet=IT&key=mqY8yECF75lXPuk7LVSI3bFjFtyEAbEX';
 
@@ -80,7 +79,6 @@ class ApartmentController extends Controller
             $form_data['img'] = Storage::put('uploads', $form_data['img']);
         }
 
-        // dd($form_data);
         $new_apartment = Apartment::create($form_data);
         if (array_key_exists('services', $form_data)) {
             $new_apartment->services()->attach($form_data['services']);
@@ -115,13 +113,12 @@ class ApartmentController extends Controller
         $button = 'Modifica';
         $separated_address = explode(',', $apartment->address);
         $visible = $apartment->visible;
-        $road = $separated_address[0];
-        $city = $separated_address[1];
+        $address = $apartment->address;
         $text = 'text-success';
         $required = '';
         $active_services = $apartment->services->count();
         $services = Service::all();
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'city', 'road', 'visible', 'text', 'required', 'active_services'));
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'address', 'visible', 'text', 'required', 'active_services'));
     }
 
     /**
@@ -153,8 +150,6 @@ class ApartmentController extends Controller
         if (empty($form_data['visible'])) {
             $form_data['visible'] = 0;
         }
-
-        $form_data['address'] = $form_data['road'] . ',' . $form_data['city'];
 
 
 
