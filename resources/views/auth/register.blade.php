@@ -61,7 +61,7 @@
                                 <div class="col-md-6" id="email-div">
                                     <input id="email" type="email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,}">
+                                    value="{{ old('email') }}" required  pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
 
                                     {{-- errore --}}
                                     <span class="text-danger invalid-feedback" id="email-error">L'email è un campo obbligatorio</span>
@@ -104,7 +104,7 @@
                                     class="form-control validate-password @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="new-password">
 
-                                    <span class="text-danger invalid-feedback" id="password-error">La password è un campo obbligatorio</span>
+
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -119,12 +119,14 @@
 
                                     <div class="col-md-6">
                                     <input id="password-confirm" type="text" class="form-control validate-password"
-                                    name="password_confirmation" required autocomplete="new-password" onclick="validatePass()">
-                                    <span class="text-danger invalid-feedback" id="password-confirm-error">La conferma della password un campo obbligatorio</span>
+                                    name="password_confirmation" required autocomplete="new-password">
+
+                                    <span class="text-danger d-none" id="same-password">Le password devono corrispondere</span>
+
+                                    <span class="text-danger d-none" id="length-password">La password deve essere più lunga di 7 caratteri</span>
+
                                 </div>
 
-
-                                <span class="text-danger d-none" id="password-check-error">Le password devono corrispondere</span>
                             </div>
 
                             <p>* Campi obbligatori</p>
@@ -195,9 +197,10 @@
 
         var passwordConfirm = document.getElementById('password-confirm');
         var password = document.getElementById('password');
-        var passwordError = document.getElementById('password-check-error');
         var passwordDiv = document.getElementById('div-password');
         let arrPass = document.querySelectorAll("check");
+        var sameError = document.getElementById('same-password');
+        var lengthError = document.getElementById('length-password');
 
         console.log(password.value);
         console.log(passwordConfirm.value);
@@ -205,23 +208,33 @@
 
         document.querySelectorAll(".validate-password").forEach(element => {
            element.addEventListener('keyup', function() {
-            if (password.value === passwordConfirm.value && password.value.length > 8 && passwordConfirm.value.length > 8) {
+            if (password.value === passwordConfirm.value && password.value.length >= 8 && passwordConfirm.value.length >= 8) {
                     passwordConfirm.classList.remove('is-invalid');
                     password.classList.remove('is-invalid');
                     passwordConfirm.classList.add('is-valid');
                     password.classList.add('is-valid');
-                    passwordError.classList.remove('d-block');
-                    passwordError.classList.add('d-none');
                 } else {
                     passwordConfirm.classList.remove('is-valid');
                     password.classList.remove('is-valid');
                     passwordConfirm.classList.add('is-invalid');
                     password.classList.add('is-invalid');
-                    passwordError.classList.remove('d-none');
-                    passwordError.classList.add('d-block');
                 }
-           })
+
+                if (password.value != passwordConfirm.value) {
+                    sameError.classList.remove('d-none')
+                    sameError.classList.add('d-block')
+                } else if (password.value === passwordConfirm.value) {
+                    sameError.classList.remove('d-block')
+                    sameError.classList.add('d-none')
+                } else if (password.value.length < 8) {
+                    lengthError.classList.remove('d-none')
+                    lengthError.classList.add('d-block')
+                }
+            })
         });
+
+
+
 
     </script>
     @endsection
