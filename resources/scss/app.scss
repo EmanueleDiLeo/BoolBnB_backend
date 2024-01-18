@@ -59,3 +59,18 @@ body{
         background-color: #9FBB73;
     }
 }
+
+.gionni {
+    border: 1px solid red;
+}
+
+.gionni:focus{
+    box-shadow: 0px 0px 10px red;
+    border: 1px solid red;
+}
+
+.pippone {
+
+    color: red;
+    background-color: blue;
+}

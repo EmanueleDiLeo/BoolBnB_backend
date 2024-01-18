@@ -177,10 +177,8 @@
                 });
             </script>
 
-
             {{-- /address section--------------------------------------- --}}
 
-            <script></script>
 
             {{-- image section--------------------------------------- --}}
             <div class="mb-3">
@@ -205,24 +203,17 @@
                     thumb.src = URL.createObjectURL(event.target.files[0]);
                 }
             </script>
+
             {{-- /image section--------------------------------------- --}}
 
+
             {{-- visible and checkbox services section--------------------------------------- --}}
-            <div class="mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="visible" id="visible" value="1"
-                        @if ($visible == 1) checked @endif>
-                    <label class="form-check-label text-black" for="visible">
-                        Visibile
-                    </label>
-                </div>
-            </div>
 
             <div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
                 <div class="customCheckBoxHolder">
                     @foreach ($services as $service)
-                        <input type="checkbox" id="service_{{ $service->id }}" class="form-check-input ciao"
-                            name="services[]" value="{{ $service->id }} "
+                    <input type="checkbox" id="service_{{ $service->id }}" class="form-check-input ciao"
+                    name="services[]" value="{{ $service->id }} "
                             @if (
                                 (!$errors->any() && $apartment?->services->contains($service)) ||
                                     ($errors->any() && in_array($service->id, old('services', [])))) checked @endif {{ $required }}>
@@ -232,15 +223,27 @@
                                 <div class="inner">{{ $service->name }}</div>
                             </div>
                         </label>
-                    @endforeach
+                        @endforeach
                 </div>
             </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="visible" id="visible" value="1"
+                        @if ($visible == 1) checked @endif>
+                    <label class="form-check-label text-black" for="visible">
+                        Seleziona questa casella per rendere pubblico l'appartamento
+                    </label>
+                </div>
+            </div>
+
             {{-- /visible and checkbox services section--------------------------------------- --}}
+
 
             {{-- description section--------------------------------------- --}}
             <div class="form-floating mb-5">
                 <textarea class="form-control" placeholder="Descrizione" id="description" name="description">
-            {{ old('description', $apartment?->description) }}</textarea>
+                    {{ old('description', $apartment?->description) }}</textarea>
                 <label class="form-label" for="description">
                     descrizione
                 </label>
