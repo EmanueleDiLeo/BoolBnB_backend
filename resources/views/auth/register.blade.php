@@ -80,7 +80,7 @@
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="date_birth" type="date"
+                                    <input id="date_birth" type="date" max="2006-01-18"
                                     class="form-control @error('date_birth') is-invalid @enderror" name="date_birth"
                                         value="{{ old('date_birth') }}" required>
 
@@ -149,6 +149,13 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+
+        const date = document.getElementById('date_birth');
+        const d = new Date();
+        d.setYear(d.getFullYear() - 18);
+        date.max = d.toISOString().split("T")[0]; //this simply converts it to the correct format
+        date.value = d.toISOString().split("T")[0];
+        console.log(date);
 
         let inputs = [
             ["#name",
