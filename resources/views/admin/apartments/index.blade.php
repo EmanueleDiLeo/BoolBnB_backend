@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1 class="text-center w-100 text-title mb-3">I Tuoi Appartamenti</h1>
-        <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">Add</a>
+        <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">Aggiungi un appartamento</a>
         <div class="row">
             @if (session('success'))
                 <div class="alert alert-success" role="alert">
