@@ -38,16 +38,39 @@
                             {{-- /button edit------------------------------- --}}
 
                             {{-- button delete------------------------------- --}}
-                            <form class="d-inline-block" action={{ route('admin.apartments.destroy', $apartment) }}
-                                method="POST" onsubmit="return confirm('Confermi di voler eliminare l appartamento?')">
+                            <form class="d-inline-block" id="deleteForm" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
-                            </form>
-                            {{-- /button delete------------------------------- --}}
+                                {{-- /button delete------------------------------- --}}
 
+                                {{-- modale di conferma------------------------------- --}}
+                                <div class="modal" id="deleteModal" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Conferma eliminazione</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Sei sicuro di voler eliminare?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                <button type="button" class="btn btn-danger" onclick="submitForm()">Elimina</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <script>
+                                function submitForm() {
+                                    document.getElementById('deleteForm').submit();
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
