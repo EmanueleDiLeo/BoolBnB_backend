@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PageController;
-use App\Http\Controllers\Api\SponsorController;
+use App\Http\Controllers\Api\Sponsors\SponsorController;
 use App\Http\Controllers\Api\Orders\OrderController;
 
 /*

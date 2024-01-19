@@ -14,6 +14,11 @@ class SponsorResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'type' => $this->type,
+            'duration' => $this->duration,
+            'price' => $this->price,
+        ];
     }
 }

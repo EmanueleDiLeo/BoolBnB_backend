@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Orders;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidSponsor;
 
 class OrderRequest extends FormRequest
 {
@@ -19,14 +20,14 @@ class OrderRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    
+
     public function rules(): array
     {
         return [
            'token'=> 'required',
-           'product'=> [
+           'sponsor'=> [
                 'required',
-                new ValidProduct()
+                new ValidSponsor()
             ]
         ];
     }
