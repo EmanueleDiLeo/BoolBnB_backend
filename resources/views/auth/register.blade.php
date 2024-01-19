@@ -13,25 +13,27 @@
                     <div id="form" class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
+{{-- name form---------------------------------- --}}
                             <div class="mb-4 row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ ('Nome *') }}</label>
 
                                 <div class="col-md-6" id="name-div">
                                     <input id="name" type="text" class="form-control" name="name"
-                                        value="{{ old('name')}}" autocomplete="name" required autofocus minlength="2">
+                                    value="{{ old('name')}}" autocomplete="name" required autofocus minlength="2">
 
-                                        {{-- errore --}}
+                                    {{-- errore --}}
                                     <span class="text-danger invalid-feedback" id="name-error">Il nome è un campo obbligatorio</span>
                                 </div>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                    @enderror
+                                @enderror
                             </div>
+{{-- /name form---------------------------------- --}}
 
 
+{{-- surname form---------------------------------- --}}
                             <div class="mb-4 row">
                                 <label for="surname"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Cognome *') }}</label>
@@ -51,12 +53,12 @@
                                         @enderror
                                 </div>
                             </div>
+{{-- /surname form---------------------------------- --}}
 
+{{-- email form---------------------------------- --}}
                             <div class="mb-4 row">
                                 <label for="email"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Email *') }}</label>
-
-
 
                                 <div class="col-md-6" id="email-div">
                                     <input id="email" type="email"
@@ -73,7 +75,9 @@
                                     @enderror
                                 </div>
                             </div>
+{{-- /email form---------------------------------- --}}
 
+{{-- birth-date form---------------------------------- --}}
                             <div class="mb-4 row">
                                 <label for="date_birth"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita*') }}
@@ -85,7 +89,9 @@
                                         value="{{ old('date_birth') }}" required>
 
                                         {{-- errore --}}
-                                        <span class="text-danger invalid-feedback">La data di nascita è un campo obbligatorio</span>
+                                        <span class="text-danger invalid-feedback">
+                                            La data di nascita è un campo obbligatorio
+                                        </span>
 
                                         @error('date_birth')
                                         <span class="invalid-feedback" role="alert">
@@ -94,7 +100,9 @@
                                     @enderror
                                 </div>
                             </div>
+{{-- /birth-date form---------------------------------- --}}
 
+{{-- password form---------------------------------- --}}
                             <div class="mb-4 row" id="div-passwords">
                                 <label for="password"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
@@ -110,30 +118,27 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                    </div>
                                 </div>
+                            </div>
 
-                                <div class="mb-4 row" id="password-confirm-div">
-                                    <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
+                            <div class="mb-4 row" id="password-confirm-div">
+                                <label for="password-confirm"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
 
-                                    <div class="col-md-6">
+                                <div class="col-md-6">
                                     <input id="password-confirm" type="text" class="form-control validate-password"
                                     name="password_confirmation" required autocomplete="new-password">
 
                                     <span class="text-danger d-none" id="same-password">Le password devono corrispondere</span>
 
                                     <span class="text-danger d-none" id="length-password">La password deve essere più lunga di 7 caratteri</span>
-
                                 </div>
-
+                                <span class="text-black">*Campi obbligatori</span>
                             </div>
-
-                            <p>* Campi obbligatori</p>
-
                             <div class="check"></div>
+{{-- /password form---------------------------------- --}}
 
-
+{{-- button registration----------------------------- --}}
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -141,24 +146,29 @@
                                     </button>
                                 </div>
                             </div>
-
-
+{{-- /button registration----------------------------- --}}
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+                            {{-- SCRIPT JQUERY-JAVASCRIPT --}}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+        // errors controll input
 
+        // date controll adult age
         const date = document.getElementById('date_birth');
         const d = new Date();
         d.setYear(d.getFullYear() - 18);
-        date.max = d.toISOString().split("T")[0]; //this simply converts it to the correct format
+        date.max = d.toISOString().split("T")[0];
         date.value = d.toISOString().split("T")[0];
         console.log(date);
+        // date controll adult age
 
+        //input text
         let inputs = [
             ["#name",
             '#name-error',
@@ -188,13 +198,11 @@
                         nameError.hide();
                     }
                 });
-        });
+            });
         })
+        //input text
 
-
-
-
-
+        // password input controll
         var passwordConfirm = document.getElementById('password-confirm');
         var password = document.getElementById('password');
         var passwordDiv = document.getElementById('div-password');
@@ -204,7 +212,6 @@
 
         console.log(password.value);
         console.log(passwordConfirm.value);
-
 
         document.querySelectorAll(".validate-password").forEach(element => {
            element.addEventListener('keyup', function() {
@@ -232,9 +239,11 @@
                 }
             })
         });
+        // password input controll
 
-
-
+        // error controll input
 
     </script>
+                            {{-- /SCRIPT JQUERY-JAVASCRIPT --}}
+
     @endsection
