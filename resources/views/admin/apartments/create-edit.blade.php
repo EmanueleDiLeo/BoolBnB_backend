@@ -17,7 +17,6 @@
             @csrf
             @method($method)
 
-
             {{-- appartment name------------------------------------------ --}}
             <div id="title-div" class="mb-3">
                 <label for="title" class="form-label">Nome Appartamento*</label>
@@ -30,7 +29,6 @@
             @error('title')
                 <p class="text-danger">Il nome è un campo obbligatorio</p>
             @enderror
-
             {{-- /appartment name------------------------------------------ --}}
 
             {{-- room number section--------------------------------------- --}}
@@ -48,7 +46,6 @@
             @enderror
             {{-- /room number section--------------------------------------- --}}
 
-
             {{-- /bed number section--------------------------------------- --}}
             <div id="bed_number-div" class="mb-3">
                 <label for="bed_number" class="form-label">Posti letto*</label>
@@ -57,7 +54,6 @@
                 <div id="bed_number-error" class="invalid-feedback">questo campo è obbligatorio</div>
                 <div id="bed_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
-
 
             @error('bed_number')
                 <p class="text-danger">Il numero dei posti letto è un campo obbligatorio</p>
@@ -74,7 +70,6 @@
                 <div id="bathroom_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
 
-
             @error('bathroom_number')
                 <p class="text-danger"> Il numero dei bagni è un campo obbligatorio</p>
             @enderror
@@ -89,29 +84,12 @@
                 <div id="sq_metres-validationError" class="text-danger invalid-feedback">non può contenere lettere e deve essere maggiore o uguale a 9</div>
             </div>
 
-
             @error('sq_metres')
                 <p class="text-danger">Il metraggio è un campo obbligatorio</p>
             @enderror
             {{-- /sq metres section--------------------------------------- --}}
 
-
-
-
             {{-- address section--------------------------------------- --}}
-
-
-            {{-- <div class="mb-3">
-                    <label for="address" class="form-label ">Indirizzo completo*</label>
-                    <input type="text" class="@error('address') is-invalid @enderror form-control"
-                        id="address" name="address" value="{{ old('address', $address) }}" required minlength="3">
-                    <div class="invalid-feedback">questo campo è obbligatorio</div>
-                </div>
-                @error('address')
-                    <p class="text-danger">L'indirizzo è un campo obbligatorio</p>
-                @enderror --}}
-
-
             <div class="mb-3">
                 <label class="form-label">Indirizzo*</label>
                 <input type="text" name="address" id="autocomplete-address" placeholder="Inserisci l'indirizzo"
@@ -130,7 +108,6 @@
                     </span>
                 @enderror
             </div>
-
 
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -169,7 +146,7 @@
                             });
                     });
 
-                    // click sui risultiti
+                    // click sui risultati
                     resultsContainer.addEventListener('click', function(event) {
                         if (event.target && event.target.tagName == 'DIV') {
                             var selectedAddress = event.target.textContent;
@@ -181,9 +158,7 @@
                     });
                 });
             </script>
-
             {{-- /address section--------------------------------------- --}}
-
 
             {{-- image section--------------------------------------- --}}
             <div id="img-div" class="mb-3">
@@ -208,12 +183,9 @@
                     thumb.src = URL.createObjectURL(event.target.files[0]);
                 }
             </script>
-
             {{-- /image section--------------------------------------- --}}
 
-
             {{-- visible and checkbox services section--------------------------------------- --}}
-
             <div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
                 <div class="customCheckBoxHolder">
                     @foreach ($services as $service)
@@ -241,9 +213,7 @@
                     </label>
                 </div>
             </div>
-
             {{-- /visible and checkbox services section--------------------------------------- --}}
-
 
             {{-- description section--------------------------------------- --}}
             <div class="form-floating mb-5">
@@ -268,6 +238,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+        //controll errors in client side
         let inputs = [
             ["#title",
             '#title-error',
@@ -320,9 +291,8 @@
                 });
             });
         })
+        //controll errors in client side
     </script>
-
-
 
     <script>
         ClassicEditor
@@ -345,9 +315,6 @@
         // Example
         const url = getCurrentURL()
 
-        console.log(url);
-
-
         serviceGroup.forEach(service => {
             service.addEventListener('change', function() {
                 if (this.checked) {
@@ -367,15 +334,10 @@
                             service.classList.add('text-danger')
                         })
                     }
-                    console.log(i)
-
                 }
             });
         });
-
-        console.log(serviceGroup)
     </script>
-
 
 @endsection
 
