@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,12 @@ class PageController extends Controller
         return response()->json($apartments);
     }
 
+    public function getServices()
+    {
+        $services= Service::all();
+        return response()->json($services);
+    }
+
     public function searchDistanceApartments($address)
     {
 
@@ -55,6 +62,21 @@ class PageController extends Controller
             ->with('services')
             ->havingRaw("distance < ?", [$radius])
             ->get();
+
+        foreach ($apartments as $apartment) {
+            if ($apartment) $success = true;
+            else $success = false;
+            if ($success) {
+                if ($apartment->img) {
+                    if (Str::contains($apartment->img, ['https://'])) {
+                    } else {
+                        $apartment->img = asset('storage/' . $apartment->img);
+                    }
+                } else {
+                    $apartment->img = asset('storage/uploads/placeholder.webp');
+                }
+            }
+        }
 
         return response()->json($apartments);
     }
