@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\SponsorController;
+use App\Http\Controllers\Api\Orders\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,7 @@ Route::get('/research/{tosearch}', [PageController::class, 'searchApartments']);
 Route::get('/apartments/get-apartment/{slug}', [PageController::class, 'getSlugApartment']);
 Route::post('/research/{address}', [PageController::class, 'searchDistanceApartments']);
 Route::get('/services', [PageController::class, 'getServices']);
+
+Route::get('/generate', [OrderController::class, 'generate']);
+Route::post('/makePayment', [OrderController::class, 'makePayment']);
+Route::get('/sponsors', [SponsorController::class, 'index']);
