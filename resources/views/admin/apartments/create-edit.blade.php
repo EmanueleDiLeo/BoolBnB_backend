@@ -13,17 +13,18 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ $route }}" method="POST" class="my-5 was-validated" enctype='multipart/form-data'>
+        <form action="{{ $route }}" method="POST" class="my-5" enctype='multipart/form-data'>
             @csrf
             @method($method)
 
 
             {{-- appartment name------------------------------------------ --}}
-            <div class="mb-3">
+            <div id="title-div" class="mb-3">
                 <label for="title" class="form-label">Nome Appartamento*</label>
-                <input type="text" class="@error('title') is-invalid @enderror form-control" id="title"
-                    name="title" value="{{ old('title', $apartment?->title) }}" required minlength="2">
-                <div class="text-danger invalid-feedback">questo campo è obbligatorio</div>
+                <input type="text" class="form-control" id="title"
+                    name="title" value="{{ old('title', $apartment?->title) }}" autocomplete="title" required autofocus minlength="2">
+                <div id="title-error" class="text-danger invalid-feedback">questo campo è obbligatorio</div>
+                <div id="title-lengthError" class="text-danger invalid-feedback">scrivi almeno 2 caratteri</div>
             </div>
 
             @error('title')
@@ -33,11 +34,12 @@
             {{-- /appartment name------------------------------------------ --}}
 
             {{-- room number section--------------------------------------- --}}
-            <div class="mb-3">
+            <div id="room_number-div" class="mb-3">
                 <label for="room_number" class="form-label">Numero stanze*</label>
                 <input type="number" class="@error('room_number') is-invalid @enderror form-control" id="room_number"
                     name="room_number" value="{{ old('room_number', $apartment?->room_number) }}" required min="1">
-                <div class="invalid-feedback">questo campo è obbligatorio</div>
+                <div id="room_number-error" class="invalid-feedback">questo campo è obbligatorio</div>
+                <div id="room_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
 
 
@@ -48,11 +50,12 @@
 
 
             {{-- /bed number section--------------------------------------- --}}
-            <div class="mb-3">
+            <div id="bed_number-div" class="mb-3">
                 <label for="bed_number" class="form-label">Posti letto*</label>
                 <input type="number" class="@error('bed_number') is-invalid @enderror form-control" id="bed_number"
-                    name="bed_number" value="{{ old('bed_number', $apartment?->bed_number) }}" required min="1">
-                <div class="invalid-feedback">questo campo è obbligatorio</div>
+                    name="bed_number" value="{{ old('bed_number', $apartment?->bed_number) }}" required min="1" pattern="[0-9]+">
+                <div id="bed_number-error" class="invalid-feedback">questo campo è obbligatorio</div>
+                <div id="bed_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
 
 
@@ -62,12 +65,13 @@
             {{-- /bed number section--------------------------------------- --}}
 
             {{-- bathroom number section--------------------------------------- --}}
-            <div class="mb-3">
+            <div id="bathroom_number-div" class="mb-3">
                 <label for="bathroom_number" class="form-label">Numero bagni*</label>
                 <input type="number" class="@error('bathroom_number') is-invalid @enderror form-control"
                     id="bathroom_number" name="bathroom_number"
                     value="{{ old('bathroom_number', $apartment?->bathroom_number) }}" required min="1">
-                <div class=" invalid-feedback">questo campo è obbligatorio</div>
+                <div id="bathroom_number-error" class=" invalid-feedback">questo campo è obbligatorio</div>
+                <div id="bathroom_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
 
 
@@ -77,11 +81,12 @@
             {{-- /bathroom number section--------------------------------------- --}}
 
             {{-- sq metres section--------------------------------------- --}}
-            <div class="mb-3">
+            <div id="sq_metres-div" class="mb-3">
                 <label for="sq_metres" class="form-label">Metri quadrati*</label>
                 <input type="number" class="@error('sq_metres') is-invalid @enderror form-control" id="sq_metres"
                     name="sq_metres" value="{{ old('sq_metres', $apartment?->sq_metres) }}" required min="9">
-                <div class=" invalid-feedback">questo campo è obbligatorio</div>
+                <div id="sq_metres-error" class=" invalid-feedback">questo campo è obbligatorio</div>
+                <div id="sq_metres-validationError" class="text-danger invalid-feedback">non può contenere lettere e deve essere maggiore o uguale a 9</div>
             </div>
 
 
@@ -181,13 +186,13 @@
 
 
             {{-- image section--------------------------------------- --}}
-            <div class="mb-3">
+            <div id="img-div" class="mb-3">
                 <label for="img" class="form-label">Immagine*</label>
                 <input id="img" class="form-control @error('img') is-invalid @enderror" name="img" type="file"
                     onchange="showUpload(event)" value="{{ old('img', $apartment?->img) }}" {{ $required }} multiple
                     accept="image/jpeg, image/jpg, image/png, image/webp">
 
-                <div class="valid-feedback"></div>
+                <div id="img-error" class="valid-feedback"></div>
 
                 @error('img')
                     <p class="text-danger">{{ $img }}</p>
@@ -260,6 +265,64 @@
 
         </form>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        let inputs = [
+            ["#title",
+            '#title-error',
+            '#title-div',
+            '#title-lengthError'
+            ],
+            ["#room_number",
+            '#room_number-error',
+            '#room_number-div'
+            ],
+            ["#bed_number",
+            '#bed_number-error',
+            '#bed_number-div'
+            ],
+            ["#bathroom_number",
+            '#bathroom_number-error',
+            '#bathroom_number-div'
+            ],
+            ["#sq_metres",
+            '#sq_metres-error',
+            '#sq_metres-div'
+            ],
+            ["#img",
+            '#img-error',
+            '#img-div'
+            ]
+        ];
+
+        $.each(inputs, function( index, value ) {
+
+            $(document).ready(function () {
+                $(value[0]).on('input', function () {
+                    var nameValue = $(this).val().trim();
+                    var nameError = $(value[1]);
+                    var lengthError = $(value[3]);
+
+                    if ( nameValue.length < 1) {
+                        lengthError.hide();
+                        nameError.show();
+                        $(value[2]).addClass( 'was-validated' );
+                    } else if(nameValue.length >= 1 && nameValue.length < 2){
+                        nameError.hide();
+                        lengthError.show()
+                        $(value[2]).addClass( 'was-validated' );
+                    } else {
+                        nameError.hide();
+                        lengthError.hide();
+                    }
+                    console.log(nameValue)
+                });
+            });
+        })
+    </script>
+
+
 
     <script>
         ClassicEditor
