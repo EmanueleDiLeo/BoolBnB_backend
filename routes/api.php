@@ -26,6 +26,7 @@ Route::get('/research/{tosearch}', [PageController::class, 'searchApartments']);
 Route::get('/apartments/get-apartment/{slug}', [PageController::class, 'getSlugApartment']);
 Route::post('/research/{address}', [PageController::class, 'searchDistanceApartments']);
 Route::get('/services', [PageController::class, 'getServices']);
+Route::get('/advanced-search', [PageController::class, 'searchAdvanceApartments']);
 
 Route::get('/generate', [OrderController::class, 'generate']);
 Route::post('/makePayment', [OrderController::class, 'makePayment']);
