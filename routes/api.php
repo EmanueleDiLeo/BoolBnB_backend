@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\Sponsors\SponsorController;
 use App\Http\Controllers\Api\Orders\OrderController;
+use App\Http\Controllers\Api\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,5 @@ Route::get('/advanced-search', [PageController::class, 'searchAdvanceApartments'
 Route::get('/generate', [OrderController::class, 'generate']);
 Route::post('/makePayment', [OrderController::class, 'makePayment']);
 Route::get('/sponsors', [SponsorController::class, 'index']);
+
+Route::post('/send-email', [MessageController::class, 'store']);
