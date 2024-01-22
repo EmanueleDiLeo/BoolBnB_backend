@@ -30,7 +30,7 @@ Route::get('/services', [PageController::class, 'getServices']);
 Route::get('/advanced-search', [PageController::class, 'searchAdvanceApartments']);
 
 Route::get('/generate', [OrderController::class, 'generate']);
-Route::post('/makePayment', [OrderController::class, 'makePayment']);
+Route::post('/makepayment', [OrderController::class, 'makePayment']);
 Route::get('/sponsors', [SponsorController::class, 'index']);
 
 Route::post('/send-email', [MessageController::class, 'store']);
