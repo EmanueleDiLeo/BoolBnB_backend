@@ -38,29 +38,34 @@
                             {{-- /button edit------------------------------- --}}
 
                             {{-- button delete------------------------------- --}}
-                            <form class="d-inline-block" id="deleteForm{{$apartment->id}}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                            <form class="d-inline-block" id="deleteForm{{ $apartment->id }}"
+                                action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{$apartment->id}}">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal{{ $apartment->id }}">
                                     <i class="fa-regular fa-trash-can"></i>
-                                    {{$apartment->title}}
+
                                 </button>
                                 {{-- /button delete------------------------------- --}}
 
                                 {{-- modale di conferma------------------------------- --}}
-                                <div class="modal" id="deleteModal{{$apartment->id}}" tabindex="-1">
+                                <div class="modal" id="deleteModal{{ $apartment->id }}" tabindex="-1">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Conferma eliminazione</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Sei sicuro di voler eliminare {{$apartment->title}}?</p>
+                                                <p>Sei sicuro di voler eliminare {{ $apartment->title }}?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                                <button type="button" class="btn btn-danger" onclick="submitForm()">Elimina</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Annulla</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    onclick="submitForm()">Elimina</button>
                                             </div>
                                         </div>
                                     </div>
@@ -71,11 +76,11 @@
                     </div>
                 </div>
             @endforeach
-                            <script>
-                                function submitForm() {
-                                    document.getElementById('deleteForm'+{{$apartment->id}}).submit();
-                                }
-                            </script>
+            <script>
+                function submitForm() {
+                    document.getElementById('deleteForm' + {{ $apartment->id }}).submit();
+                }
+            </script>
         </div>
     </div>
 @endsection
