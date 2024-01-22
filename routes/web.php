@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Guest\PageController;
+use App\Http\Controllers\Admin\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,11 @@ use App\Http\Controllers\Guest\PageController;
 */
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,7 +39,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('apartments', ApartmentController::class);
 
 
-        // Rotta custome
+        // Rotta custom
         Route::get('message/{apartment}', [ApartmentController::class, 'messageApartment'])->name('message');
     });
 

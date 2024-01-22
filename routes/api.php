@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\Sponsors\SponsorController;
 use App\Http\Controllers\Api\Orders\OrderController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Admin\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,12 @@ use App\Http\Controllers\Api\MessageController;
 |
 */
 
+Route::get('/authenticate', [AdminController::class, 'authenticate'])->name('authenticate');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 
 Route::get('/apartments', [PageController::class, 'index']);
 Route::get('/research/{tosearch}', [PageController::class, 'searchApartments']);
@@ -34,3 +39,6 @@ Route::post('orders/make/payment', [OrderController::class, 'makePayment']);
 Route::get('/sponsors', [SponsorController::class, 'index']);
 
 Route::post('/send-email', [MessageController::class, 'store']);
+
+
+

@@ -68,6 +68,8 @@
                 </a>
 
             </div>
+            <a href="{{ route('payment') }}" class="btn btn-info">Sponsorizza il tuo appartamento</a>
+
 
         </div>
     </div>
