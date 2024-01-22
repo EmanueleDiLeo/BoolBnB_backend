@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Service;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ApartmentRequest;
@@ -22,6 +23,18 @@ class ApartmentController extends Controller
         $apartments = Apartment::where('user_id', Auth::id())->get();
         return view('admin.apartments.index', compact('apartments'));
     }
+
+    // Custome functions
+    public function messageApartment(Apartment $apartment)
+    {
+        if ($apartment->user_id !== Auth::id()) {
+            abort('404');
+        };
+        $number_messages = Message::where('apartment_id', $apartment->id)->where('apartment_id', Auth::id())->count();
+        $messages = Message::where('apartment_id', $apartment->id)->where('apartment_id', Auth::id())->get();
+        return view('admin.apartments.message', compact('messages', 'number_messages'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
