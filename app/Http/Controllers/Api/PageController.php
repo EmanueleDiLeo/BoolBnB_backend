@@ -36,7 +36,7 @@ class PageController extends Controller
 
     public function getServices()
     {
-        $services= Service::all();
+        $services = Service::all();
         return response()->json($services);
     }
 
@@ -87,6 +87,8 @@ class PageController extends Controller
         $address = $request->query('address');
         $radius = $request->query('radius');
         $services = $request->query('services');
+        $rooms = $request->query('rooms');
+        $beds = $request->query('beds');
 
         $link1 = 'https://api.tomtom.com/search/2/geocode/';
         $link2 = '.json?countrySet=IT&key=mqY8yECF75lXPuk7LVSI3bFjFtyEAbEX';
@@ -104,13 +106,17 @@ class PageController extends Controller
                        sin( radians( lat ) ) )
                      ) AS distance', [$lat, $lon, $lat])
             ->where('visible', 1)
+            ->where('room_number', '>=', $rooms)
+            ->where('bed_number', '>=', $beds)
             ->havingRaw("distance < ?", [$radius]);
-            if($services){
-                foreach($services as $service){
-                    $apartments->whereHas('services', function($query) use ($service){$query->where('service_id', $service);});
-                }
+        if ($services) {
+            foreach ($services as $service) {
+                $apartments->whereHas('services', function ($query) use ($service) {
+                    $query->where('service_id', $service);
+                });
             }
-            $apartments=$apartments->get();
+        }
+        $apartments = $apartments->get();
 
         foreach ($apartments as $apartment) {
             if ($apartment) $success = true;
