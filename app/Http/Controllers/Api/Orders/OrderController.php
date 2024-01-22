@@ -11,7 +11,6 @@ use App\Models\Sponsor;
 class OrderController extends Controller
 {
     public function generate(Request $request, Gateway $gateway){
-        // dd($gateway->clientToken()->generate());
         $token = $gateway->clientToken()->generate();
         $data = [
             'success'=>true,
