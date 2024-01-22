@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="card p-2 ">
+    <div class="container">
+        <div class="card p-2 ">
 
-                @if (Str::contains($apartment->img, ['https://']))
-                    <img src="{{ $apartment->img }}" alt="{{ $apartment->title }}">
-                @else
-                    <img src="{{ asset('storage/' . $apartment->img) }}" alt="{{ $apartment->title }}">
-                @endif
+            @if (Str::contains($apartment->img, ['https://']))
+                <img src="{{ $apartment->img }}" alt="{{ $apartment->title }}">
+            @else
+                <img src="{{ asset('storage/' . $apartment->img) }}" alt="{{ $apartment->title }}">
+            @endif
 
             <div class="card-body">
                 <h4>{{ $apartment->title }}</h4>
@@ -20,10 +20,10 @@
                     </a>
                     {{-- /button edit------------------------------- --}}
                     {{-- button delete------------------------------- --}}
-                    <form class="d-inline-block" action={{ route('admin.apartments.destroy', $apartment) }}
-                    method="POST" onsubmit="return confirm('Confermi di voler eliminare l appartamento?')">
-                    @csrf
-                    @method('DELETE')
+                    <form class="d-inline-block" action={{ route('admin.apartments.destroy', $apartment) }} method="POST"
+                        onsubmit="return confirm('Confermi di voler eliminare l appartamento?')">
+                        @csrf
+                        @method('DELETE')
                         <button type="submit" class="btn btn-danger">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
@@ -31,8 +31,8 @@
                     {{-- /button delete------------------------------- --}}
                 </div>
                 <p>Indirizzo: {{ $apartment->address }}</p>
-                <p>lat: {{$apartment->lat}}</p>
-                <p>lon: {{$apartment->lon}}</p>
+                <p>lat: {{ $apartment->lat }}</p>
+                <p>lon: {{ $apartment->lon }}</p>
 
                 <h4>Info appartamento</h4>
                 <p>Stanze: {{ $apartment->room_number }}</p>
@@ -42,15 +42,15 @@
 
                 <h4>Stato</h4>
                 @if ($apartment->visible === 1)
-                <p>Pubblico</p>
+                    <p>Pubblico</p>
                 @else
-                <p>Privato</p>
+                    <p>Privato</p>
                 @endif
 
                 <h4>Servizi</h4>
                 <ul>
-                    @forelse ( $apartment->services as $service )
-                        <li>{{$service->name}}</li>
+                    @forelse ($apartment->services as $service)
+                        <li>{{ $service->name }}</li>
                     @empty
                         <li>Nessun Servizio</li>
                     @endforelse
@@ -63,13 +63,10 @@
                     <p>Nessuna descrizione</p>
                 @endif
 
+                <a href="{{ route('admin.message', $apartment) }}" class="btn btn-success">
+                    <i class="fa-solid fa-circle-info">Messaggi</i>
+                </a>
 
-                <h4>I tuoi messaggi</h4>
-                @forelse ($apartment->messages as $message)
-                    <p>Inviato da: {{ $message->sender_email }} <br>{{ $message->text }}</p>
-                @empty
-                    <p>Non hai messaggi</p>
-                @endforelse
             </div>
 
         </div>

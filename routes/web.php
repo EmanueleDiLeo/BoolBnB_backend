@@ -28,10 +28,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->name('admin.')
-    ->group(function(){
+    ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('apartments', ApartmentController::class);
 
+
+        // Rotta custome
+        Route::get('message/{apartment}', [ApartmentController::class, 'messageApartment'])->name('message');
     });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
