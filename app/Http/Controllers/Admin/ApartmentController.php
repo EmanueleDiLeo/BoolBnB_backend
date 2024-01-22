@@ -30,8 +30,8 @@ class ApartmentController extends Controller
         if ($apartment->user_id !== Auth::id()) {
             abort('404');
         };
-        $number_messages = Message::where('apartment_id', $apartment->id)->where('apartment_id', Auth::id())->count();
-        $messages = Message::where('apartment_id', $apartment->id)->where('apartment_id', Auth::id())->get();
+        $number_messages = Message::where('apartment_id', $apartment->id)->count();
+        $messages = Message::where('apartment_id', $apartment->id)->get();
         return view('admin.apartments.message', compact('messages', 'number_messages'));
     }
 
