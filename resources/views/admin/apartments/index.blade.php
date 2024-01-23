@@ -4,13 +4,14 @@
     <div class="container">
         <h1 class="text-center w-100 text-title mb-3">I Tuoi Appartamenti</h1>
         <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">Aggiungi un appartamento</a>
+
         <div class="row">
             @if (session('success'))
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
                 </div>
             @endif
-            @foreach ($apartments as $apartment)
+            @forelse ($apartments as $apartment)
                 <div class="col-4 my-3">
                     <div class="card h-100">
                         <div class=" card-img w-100 overflow-hidden" style="height: 220px;">
@@ -45,7 +46,6 @@
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal{{ $apartment->id }}">
                                     <i class="fa-regular fa-trash-can"></i>
-
                                 </button>
                                 {{-- /button delete------------------------------- --}}
 
@@ -59,28 +59,29 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Sei sicuro di voler eliminare {{ $apartment->title }}?</p>
+                                                <p>Sei sicuro di voler eliminare "{{ $apartment->title }}"?</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Annulla</button>
                                                 <button type="button" class="btn btn-danger"
-                                                    onclick="submitForm()">Elimina</button>
+                                                    onclick="submitForm({{ $apartment->id }})">Elimina</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
-            @endforeach
-            <script>
-                function submitForm() {
-                    document.getElementById('deleteForm' + {{ $apartment->id }}).submit();
-                }
-            </script>
+                <script>
+                    function submitForm(id) {
+                        document.getElementById('deleteForm' + id).submit();
+                    }
+                </script>
+            @empty
+            <h4 class="text-center w-100 text-title mb-3">Non ci sono appartamenti</h4>
+            @endforelse
         </div>
     </div>
 @endsection

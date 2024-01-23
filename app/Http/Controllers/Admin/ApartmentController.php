@@ -203,6 +203,6 @@ class ApartmentController extends Controller
         }
 
         $apartment->delete();
-        return redirect()->route('admin.apartments.index')->with('success',  ' Appartamento ' . $apartment->title . ' eliminato con successo');
+        return redirect()->route('admin.apartments.index')->with('success',  ' Appartamento '. '"' . $apartment->title . '"' . ' eliminato con successo');
     }
 }
