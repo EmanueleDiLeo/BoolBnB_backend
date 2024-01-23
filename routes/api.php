@@ -34,9 +34,15 @@ Route::post('/research/{address}', [PageController::class, 'searchDistanceApartm
 Route::get('/services', [PageController::class, 'getServices']);
 Route::get('/advanced-search', [PageController::class, 'searchAdvanceApartments']);
 
-Route::get('/generate', [OrderController::class, 'generate']);
-Route::post('orders/make/payment', [OrderController::class, 'makePayment']);
-Route::get('/sponsors', [SponsorController::class, 'index']);
+
+Route::middleware(['auth', 'verified'])
+->prefix('pay')
+->name('pay.')
+->group(function () {
+    Route::get('/generate', [OrderController::class, 'generate']);
+    Route::post('orders/make/payment', [OrderController::class, 'makePayment']);
+    Route::get('/sponsors', [SponsorController::class, 'index']);
+    });
 
 Route::post('/send-email', [MessageController::class, 'store']);
 
