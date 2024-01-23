@@ -37,7 +37,12 @@ class MessageController extends Controller
             return response()->json(compact('success', 'errors'));
         }
 
-        $sended_at = Carbon::now()->format('Y-m-d');
+        // $sended_at = Carbon::now()->format('Y-m-d H:i:s');
+        // $sended_at->setTimezone('UTC');
+
+        $timestamp = Carbon::now();
+        $sended_at = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'Europe/Stockholm');
+        $sended_at->setTimezone('UTC');
         $data['sended_at'] = $sended_at;
         $new_lead = new Message();
         $new_lead->fill($data);

@@ -60,6 +60,7 @@ class PageController extends Controller
                      ) AS distance', [$lat, $lon, $lat])
             ->where('visible', 1)
             ->with('services')
+            ->orderBy('distance', 'asc')
             ->havingRaw("distance < ?", [$radius])
             ->get();
 
@@ -100,15 +101,17 @@ class PageController extends Controller
         $apartments = Apartment::select('apartments.*')
             ->with('services')
             ->selectRaw('( 6371 * acos( cos( radians(?) ) *
-                       cos( radians( lat ) )
-                       * cos( radians( lon ) - radians(?)
-                       ) + sin( radians(?) ) *
-                       sin( radians( lat ) ) )
-                     ) AS distance', [$lat, $lon, $lat])
+                    cos( radians( lat ) )
+                    * cos( radians( lon ) - radians(?)
+                    ) + sin( radians(?) ) *
+                    sin( radians( lat ) ) )
+                    ) AS distance', [$lat, $lon, $lat])
             ->where('visible', 1)
             ->where('room_number', '>=', $rooms)
             ->where('bed_number', '>=', $beds)
+            ->orderBy('distance', 'asc')
             ->havingRaw("distance < ?", [$radius]);
+
         if ($services) {
             foreach ($services as $service) {
                 $apartments->whereHas('services', function ($query) use ($service) {
@@ -117,6 +120,7 @@ class PageController extends Controller
             }
         }
         $apartments = $apartments->get();
+
 
         foreach ($apartments as $apartment) {
             if ($apartment) $success = true;

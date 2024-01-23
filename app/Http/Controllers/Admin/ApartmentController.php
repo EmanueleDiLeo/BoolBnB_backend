@@ -31,7 +31,7 @@ class ApartmentController extends Controller
             abort('404');
         };
         $number_messages = Message::where('apartment_id', $apartment->id)->count();
-        $messages = Message::where('apartment_id', $apartment->id)->get();
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('created_at', 'DESC')->get();
         return view('admin.apartments.message', compact('messages', 'number_messages'));
     }
 
