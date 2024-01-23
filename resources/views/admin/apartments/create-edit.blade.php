@@ -99,19 +99,6 @@
 
 
             {{-- address section--------------------------------------- --}}
-
-
-            {{-- <div class="mb-3">
-                    <label for="address" class="form-label ">Indirizzo completo*</label>
-                    <input type="text" class="@error('address') is-invalid @enderror form-control"
-                        id="address" name="address" value="{{ old('address', $address) }}" required minlength="3">
-                    <div class="invalid-feedback">questo campo è obbligatorio</div>
-                </div>
-                @error('address')
-                    <p class="text-danger">L'indirizzo è un campo obbligatorio</p>
-                @enderror --}}
-
-
             <div class="mb-3">
                 <label class="form-label">Indirizzo*</label>
                 <input type="text" name="address" id="autocomplete-address" placeholder="Inserisci l'indirizzo"
