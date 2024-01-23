@@ -31,87 +31,109 @@
     {{-- <button class="btn btn-dark" data-toggle="modal" data-target="#modal-pagamento">PAGA E SORRIDI</button> --}}
 </form>
 
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button id="token" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-        ...
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-    </div>
-    </div>
-</div>
-</div>
-
-
-{{-- <div class="modal" id="modal-pagamento">
-
-    <div class="card w-50">
-        <div class="header">
-            <div class="title">Payment method</div>
-            <i class="far fa-question-circle fa-2x"></i>
+<div class="modal fade w-100" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog w-100">
+        <div class="modal-content w-75">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
 
-            <div class="cards-body">
-                <div class="cards row">
+                {{-- immagini carte --}}
+                <div class="cards d-flex">
 
-                    <a class="col-auto" href="#">
-                        <img class="card" src="https://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/Visa-icon.png" alt="">
-                    </a>
-                    <a class="col-auto" href="#">
-                        <img class="card" src="https://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/Master-Card-icon.png" alt="">
-                    </a>
-                <a class="col-auto" href="#">
-                    <img class="card" src="https://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/American-Express-icon.png" alt="">
-                </a>
-            </div>
-            <form class="form-card" action="" method="">
-                <div class="name-card ">
-                    <div class="card-label">
-                        <label for="name">Cardholder name</label>
-                    </div>
-                    <input class="form-group" type="text" name="name-card" placeholder="Diane Miles"/>
+                    <label class="me-2">
+                        <input type="radio" name="test" value="small" checked class="radio-payment">
+                        <img class="img-card" src="https://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/Visa-icon.png" alt="">
+                    </label>
+                    <label class="me-2">
+                        <input type="radio" name="test" value="small" checked class="radio-payment">
+                        <img class="img-card" src="https://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/Master-Card-icon.png" alt="">
+                    </label>
+                    <label class="me-2">
+                        <input type="radio" name="test" value="small" checked class="radio-payment">
+                        <img class="img-card" src="https://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/American-Express-icon.png" alt="">
+                    </label>
+
                 </div>
-                <div class="info-card">
-                    <div class="info-card-number">
+                {{-- immagini carte --}}
+
+                <form class="form-card" action="" method="">
+                    <div class="name-card ">
                         <div class="card-label">
-                            <label for="cardName">Card number</label>
+                            <label for="name">Cardholder name</label>
                         </div>
-                <input class="form-group" type="text" name="cardnumber" placeholder="1234 6573 8228 7373"/>
-            </div>
-                    <div class="info-card-payment">
-                <div class="card-label">
-                    <label for="date">Date</label>
+                            <input class="form-group" type="text" name="name-card" placeholder="Diane Miles"/>
+                        </div>
+                    <div class="info-card">
+                        <div class="info-card-number">
+                            <div class="card-label">
+                                <label for="cardName">Card number</label>
+                            </div>
+                                <input class="form-group" type="text" name="cardnumber" placeholder="1234 6573 8228 7373"/>
+                        </div>
+                        <div class="info-card-payment">
+                    <div class="card-label">
+                        <label for="date">Date</label>
+                    </div>
+                    <input class="form-group" type="text" name="date" placeholder="10/25"/>
                 </div>
-                <input class="form-group" type="text" name="date" placeholder="10/25"/>
-            </div>
-            <div class="info-card-payment">
-                <div class="card-label">
-                    <label for="ccv">CCV</label>
+                <div class="info-card-payment">
+                    <div class="card-label">
+                        <label for="ccv">CCV</label>
+                    </div>
+                    <input class="form-group" type="text" name="ccv" placeholder="329"/>
                 </div>
-                <input class="form-group" type="text" name="ccv" placeholder="329"/>
+            </div>
+        </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
-    </form>
-            </div>
-            <div class="footer">
-                <i class="fas fa-info-circle fa-2x"></i>
-            <p class="text"> Credit Card payments may take up to 24h to processed </p>
-            </div>
-        </div>
-    </div> --}}
+    </div>
+</div>
+<!-- /Modal -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var generateToken = document.getElementById('token');
+    let token
+
+    generateToken.addEventListener('click', function() {
+        //richiesta AJAX
+        $.ajax({
+            method: "GET",
+            url: "http://127.0.0.1:8000/api/generate",
+            success: (result) => {
+                token = result.token;
+                console.log(token);
 
 
-    @endsection
+            },
+            error: (error) => {
+                if(error.status === 422) { // "Unprocessable Entity" - Form data invalid
+                    $("#successMessage").addClass('visually-hidden');
+                    var message = error.responseJSON.errors ? error.responseJSON.errors.comment ?  error.responseJSON.errors.comment[0] : '' : '';
+                    $("#comment-errors-data").html(message);
+                    submitButton.html('Save');
+                }
+            }
+        });
+    });
+
+
+
+</script>
+
+
+
+@endsection
