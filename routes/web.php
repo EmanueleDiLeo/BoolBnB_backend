@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\PaymentController;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
-Route::get('/selectPayment', [PaymentController::class, 'index'])->name('selectPayment');
+Route::get('/selectPayment/{apartment}', [PaymentController::class, 'index'])->name('selectPayment');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

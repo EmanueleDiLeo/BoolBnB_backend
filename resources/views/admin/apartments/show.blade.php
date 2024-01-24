@@ -68,7 +68,7 @@
                 </a>
 
             </div>
-            <a href="{{ route('selectPayment') }}" class="btn btn-info">Sponsorizza il tuo appartamento</a>
+            <a href="{{ route('selectPayment', $apartment) }}" class="btn btn-info">Sponsorizza il tuo appartamento</a>
 
 
         </div>
