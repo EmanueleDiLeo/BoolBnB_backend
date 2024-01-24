@@ -24,7 +24,7 @@ return new class extends Migration
                 ->on('sponsors')
                 ->onDelete('cascade');
 
-            $table->date('end_date')->nullable();
+            $table->datetime('end_date')->nullable();
         });
     }
 
