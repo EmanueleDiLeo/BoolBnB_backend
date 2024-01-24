@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('sender_email', 50);
             $table->string('text', 255);
-            $table->date('sended_at');
+            $table->datetime('sended_at');
 
             $table->timestamps();
         });
