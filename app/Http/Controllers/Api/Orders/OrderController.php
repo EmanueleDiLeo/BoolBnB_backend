@@ -75,11 +75,12 @@ class OrderController extends Controller
             $now = Carbon::now('GMT+1');
             $new_date = Carbon::createFromFormat('Y-m-d H:i:s', $now, 'Europe/Rome');
             $end_date = $new_date->addHours($sponsor->duration);
-
             //id for single
-            // $apartment->sponsors->attach($apartment->id, $sponsor->id, $end_date);
+            $sponsor->apartments()->attach($apartment->id, ['apartment_id' => $apartment->id]);
+            $sponsor->apartments()->attach($sponsor->id, ['sponsor_id' => $sponsor->id]);
+            // $sponsor->apartments()->attach($end_date, ['end_date' => $end_date]);
 
-            // $apartment->save();
+            $apartment->save();
 
             return redirect()->route('selectPayment', $apartment)->with('success',  ' Pagamento riuscito');
         } else {
