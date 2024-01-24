@@ -20,28 +20,33 @@ class OrderController extends Controller
     }
 
     public function makePayment(OrderRequest $request, Gateway $gateway){
-        $sponsor= Sponsor::find($request->sponsor);
-        $result = $gateway->transaction()->sale([
 
-            'amount'=>$sponsor->price,
-            'paymentMethodNonce'=>$request->token,
-            'options'=>[
-                'submitForSettlement'=>true
-            ]
-        ]);
 
-        if($result->success){
-            $data = [
-                'success'=>true,
-                'message'=> 'transazione eseguita con successo'
-            ];
-            return response()->json($data, 200);
-        } else{
-            $data = [
-                'success'=>false,
-                'message'=> 'transazione NON eseguita'
-            ];
-            return response()->json($data, 401);
-        };
+        // $sponsor= Sponsor::find($request->sponsor);
+
+        // $result = $gateway->transaction()->sale([
+
+        //     'amount'=>$sponsor->price,
+        //     'paymentMethodNonce'=>$request->token,
+        //     'options'=>[
+        //         'submitForSettlement'=>true
+        //     ]
+        // ]);
+
+        // if($result->success){
+        //     $data = [
+        //         'success'=>true,
+        //         'message'=> 'transazione eseguita con successo'
+        //     ];
+        //     return response()->json($data, 200);
+        // } else{
+        //     $data = [
+        //         'success'=>false,
+        //         'message'=> 'transazione NON eseguita'
+        //     ];
+        //     return response()->json($data, 401);
+        // };
+
+        return response()->json($request->sponsor);
     }
 }

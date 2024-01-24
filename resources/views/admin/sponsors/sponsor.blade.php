@@ -8,7 +8,7 @@
 @section('content')
 
 <h1>SPONSOR PAGA E SORRIDI</h1>
-<form action="" method="POST">
+<form action="{{route('makePayment')}}" method="POST">
     @csrf
     @method('POST')
     <div class="container d-flex">
@@ -27,15 +27,14 @@
         </div>
         @endforeach
     </div>
-
-    {{-- <button class="btn btn-dark" data-toggle="modal" data-target="#modal-pagamento">PAGA E SORRIDI</button> --}}
+    <button class="btn btn-dark" type="submit">PAGA E SORRIDI</button>
 </form>
 
-<button id="token" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
 
 <!-- Modal -->
+<button id="token" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+You Pay
+</button>
 <div class="modal fade w-100" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog w-100">
         <div class="modal-content w-75">
