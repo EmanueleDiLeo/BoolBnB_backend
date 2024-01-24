@@ -45,6 +45,3 @@ Route::get('/sponsors', [SponsorController::class, 'index']);
 //     });
 Route::post('/payment/create', [OrderController::class, 'create'])->name('payment.create');
 Route::post('/send-email', [MessageController::class, 'store']);
-
-
-
