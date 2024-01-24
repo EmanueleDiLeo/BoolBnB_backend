@@ -36,7 +36,7 @@ Route::get('/advanced-search', [PageController::class, 'searchAdvanceApartments'
 
 
 Route::get('/generate', [OrderController::class, 'generate']);
-Route::post('orders/make/payment', [OrderController::class, 'makePayment']);
+Route::post('orders/make/payment', [OrderController::class, 'makePayment'])->name('makePayment');
 Route::get('/sponsors', [SponsorController::class, 'index']);
 // Route::middleware(['auth', 'verified'])
 // ->prefix('pay')
