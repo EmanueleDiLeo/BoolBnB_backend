@@ -43,8 +43,12 @@
                                 action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal{{ $apartment->id }}">
+                                <button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal{{ $apartment->id }}"
+                                >
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                                 {{-- /button delete------------------------------- --}}
