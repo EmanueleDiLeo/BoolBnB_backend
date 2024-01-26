@@ -23,11 +23,12 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
 <body>
     @include('admin.partials.header')
 
-    <div class="main-wrapper d-flex">
+    <main class="main-wrapper d-flex">
+        @include('admin.partials.aside')
         <div class="p-5 overflow-auto w-100 bg-color">
             @yield('content')
         </div>
 
-    </div>
+    </main>
 </body>
 </html>
