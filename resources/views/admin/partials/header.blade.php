@@ -1,16 +1,15 @@
-<header class="">
-    <div class="container-fluid">
-        <nav class="navbar w-100 d-flex justify-content-around ">
-            <ul class="list-unstyled d-flex">
-                <li class="mx-3"><a href="{{ route('admin.home') }}" @class(['active' => Route::is('admin.home')])>Home</a></li>
-                <li><a href="{{ route('admin.apartments.index') }}" @class(['active' => Route::is('admin.apartments.index')])>I Tuoi Appartamenti</a>
-                </li>
-            </ul>
-            <form action="{{ route('logout') }}" class="d-flex" role="search" method="POST">
-                @csrf
-                <button class="btn btn-light mb-3" type="submit"><i
-                        class="fa-solid fa-right-from-bracket"></i></button>
-            </form>
-        </nav>
+<header>
+    <div class="d-flex justify-content-between align-items-center h-100">
+        <div class="img-container h-100">
+            <a href="{{ route('admin.home')}}" class=" text-decoration-none h-100 d-flex align-items-center">
+                <img src="/img/logo.png" class="h-75 me-2" alt="logo">
+                <span class="text-white logo-title">Boolbnb</span>
+            </a>
+        </div>
+        <form action="{{ route('logout') }}" class="d-flex" role="search" method="POST">
+            @csrf
+            <button class="btn btn-light" type="submit"><i
+                    class="fa-solid fa-right-from-bracket"></i></button>
+        </form>
     </div>
 </header>
