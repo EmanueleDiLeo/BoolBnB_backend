@@ -39,6 +39,10 @@ $formattedDate = $date->format('M d, Y H:i:s');
                 </script>
                 <h4>Sponsorizzato per:</h4>
                 <div id="timer"></div>
+                <div>
+                    <a href="{{ route('selectPayment', $apartment) }}" class="btn btn-info mb-2">Incrementa la tua
+                        sponsorizzazione</a>
+                </div>
             @else
                 <h4>Non sei sponsorizzato sponsorizzati ora!</h4>
                 <div>
