@@ -71,7 +71,8 @@ class PageController extends Controller
                        sin( radians( lat ) ) )
                      ) AS distance', [$lat, $lon, $lat])
             ->leftJoin('apartment_sponsor', function ($join) {
-                $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');})
+                $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');
+            })
             ->where('visible', 1)
             ->with('services')
             ->orderByRaw("CASE WHEN apartment_sponsor.end_date > now() THEN 0 ELSE 1 END, distance asc")
@@ -125,7 +126,8 @@ class PageController extends Controller
                     sin( radians( lat ) ) )
                     ) AS distance', [$lat, $lon, $lat])
             ->leftJoin('apartment_sponsor', function ($join) {
-                $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');})
+                $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');
+            })
             ->where('visible', 1)
             ->where('room_number', '>=', $rooms)
             ->where('bed_number', '>=', $beds)
@@ -186,7 +188,7 @@ class PageController extends Controller
 
     public function getSlugApartment($slug)
     {
-        $apartment = Apartment::where('slug', $slug)->with('services')->first();
+        $apartment = Apartment::where('slug', $slug)->with('services', 'user')->first();
 
         if ($apartment) {
             $success = true;
