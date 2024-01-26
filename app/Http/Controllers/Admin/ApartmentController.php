@@ -12,6 +12,7 @@ use App\Http\Requests\ApartmentRequest;
 use App\Functions\Helper;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -109,7 +110,18 @@ class ApartmentController extends Controller
             abort('404');
         };
         $apartment = Apartment::where('id', $apartment->id)->where('user_id', Auth::id())->first();
-        return view('admin.apartments.show', compact('apartment'));
+        $max_date = Apartment::join('apartment_sponsor', function ($join) {
+            $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');
+        })
+            ->where('id', $apartment->id)
+            ->max('end_date');
+        if ($max_date < Carbon::now('GMT+1')) {
+            $max_date = null;
+        }
+
+
+
+        return view('admin.apartments.show', compact('apartment', 'max_date'));
     }
 
     /**
@@ -203,6 +215,6 @@ class ApartmentController extends Controller
         }
 
         $apartment->delete();
-        return redirect()->route('admin.apartments.index')->with('success',  ' Appartamento '. '"' . $apartment->title . '"' . ' eliminato con successo');
+        return redirect()->route('admin.apartments.index')->with('success',  ' Appartamento ' . '"' . $apartment->title . '"' . ' eliminato con successo');
     }
 }
