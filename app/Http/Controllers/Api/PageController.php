@@ -79,7 +79,6 @@ class PageController extends Controller
 
         $apartments = $apartments->unique('id');
 
-
         foreach ($apartments as $apartment) {
             if ($apartment) $success = true;
             else $success = false;
@@ -114,7 +113,7 @@ class PageController extends Controller
         $lat = $data['position']['lat'];
         $lon = $data['position']['lon'];
 
-        $apartments = Apartment::select('apartments.*')
+        $apartments = Apartment::select('*')
             ->with('services')
             ->selectRaw('( 6371 * acos( cos( radians(?) ) *
                     cos( radians( lat ) )
@@ -122,10 +121,12 @@ class PageController extends Controller
                     ) + sin( radians(?) ) *
                     sin( radians( lat ) ) )
                     ) AS distance', [$lat, $lon, $lat])
+            ->leftJoin('apartment_sponsor', function ($join) {
+                $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');})
             ->where('visible', 1)
             ->where('room_number', '>=', $rooms)
             ->where('bed_number', '>=', $beds)
-            ->orderBy('distance', 'asc')
+            ->orderByRaw("CASE WHEN apartment_sponsor.end_date > now() THEN 0 ELSE 1 END, distance asc")
             ->havingRaw("distance < ?", [$radius]);
 
         if ($services) {
@@ -136,6 +137,7 @@ class PageController extends Controller
             }
         }
         $apartments = $apartments->get();
+        $apartments = $apartments->unique('id');
 
 
         foreach ($apartments as $apartment) {
