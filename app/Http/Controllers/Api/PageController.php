@@ -9,12 +9,21 @@ use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PageController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::where('visible', 1)->get();
+        $apartments = DB::table('apartments')
+            ->join('apartment_sponsor', function ($join) {
+                $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');
+            })
+            ->where('end_date', '>=', Carbon::now())
+            ->inRandomOrder()
+            ->get();
+
+        $apartments = $apartments->unique('apartment_id');
 
         foreach ($apartments as $apartment) {
             if ($apartment) $success = true;
@@ -49,20 +58,27 @@ class PageController extends Controller
         $data = $response->json('results')[0];
         $lat = $data['position']['lat'];
         $lon = $data['position']['lon'];
-        $radius = 20;
+        $radius = 15;
 
-        $apartments = Apartment::select('apartments.*')
+        $apartments = Apartment::select('*')
             ->selectRaw('( 6371 * acos( cos( radians(?) ) *
                        cos( radians( lat ) )
                        * cos( radians( lon ) - radians(?)
                        ) + sin( radians(?) ) *
                        sin( radians( lat ) ) )
                      ) AS distance', [$lat, $lon, $lat])
+            ->leftJoin('apartment_sponsor', function ($join) {
+                $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');})
             ->where('visible', 1)
             ->with('services')
-            ->orderBy('distance', 'asc')
-            ->havingRaw("distance < ?", [$radius])
-            ->get();
+            ->orderByRaw("CASE WHEN apartment_sponsor.end_date > now() THEN 0 ELSE 1 END, distance asc")
+            ->havingRaw("distance < ?", [$radius]);
+
+
+        $apartments = $apartments->get();
+
+        $apartments = $apartments->unique('id');
+
 
         foreach ($apartments as $apartment) {
             if ($apartment) $success = true;
