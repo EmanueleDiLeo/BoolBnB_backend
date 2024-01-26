@@ -63,6 +63,9 @@ class ApartmentController extends Controller
     public function store(ApartmentRequest $request)
     {
         $form_data = $request->all();
+        dd($request);
+
+
 
         $form_data['slug'] = Helper::generateSlug($form_data['title'], Apartment::class);
         $form_data['user_id'] = Auth::id();
