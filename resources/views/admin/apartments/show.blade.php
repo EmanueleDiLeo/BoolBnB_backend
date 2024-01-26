@@ -1,8 +1,52 @@
+<?php
+use Carbon\Carbon;
+$date = Carbon::parse($max_date);
+$formattedDate = $date->format('M d, Y H:i:s');
+?>
 @extends('layouts.admin')
 
 @section('content')
     <div class="container">
         <div class="card p-2 ">
+            @if ($max_date != null)
+                <script>
+                    let clock = "<?php echo $formattedDate; ?>"
+                    // Aggiungi a new date la data della fine countdown e ne prendi il tempo
+                    let countDownDate = new Date(clock).getTime();
+                    // imposto let timer per fare il clear interval al momento che diventa zero
+                    let timer = setInterval(() => {
+                        // prendo ora di data ora di adesso e faccio la differenza
+                        let now = new Date().getTime();
+                        let distance = countDownDate - now;
+
+                        // formule per estrapolare giorni more minuti e secondi convertendo a stringa e aggiongendo con pad uno zero
+                        let days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString()
+                            .padStart(2, '0');
+                        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2,
+                            '0');
+                        let seconds = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                        clock = ` ${days} : ${hours} : ${minutes} : ${seconds}`
+                        document.getElementById('timer').innerHTML = clock;
+                        // Countdown output
+                        // console.log(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
+                        if (distance < 0) {
+                            clearInterval(timer);
+                            // Text at the end of the countdown
+                            console.log("Too late!")
+                        }
+                    }, 1000)
+                </script>
+                <h4>Sponsorizzato per:</h4>
+                <div id="timer"></div>
+            @else
+                <h4>Non sei sponsorizzato sponsorizzati ora!</h4>
+                <div>
+                    <a href="{{ route('selectPayment', $apartment) }}" class="btn btn-info mb-2">Sponsorizza il tuo
+                        appartamento</a>
+                </div>
+            @endif
+
 
             @if (Str::contains($apartment->img, ['https://']))
                 <img src="{{ $apartment->img }}" alt="{{ $apartment->title }}">
@@ -68,7 +112,7 @@
                 </a>
 
             </div>
-            <a href="{{ route('selectPayment', $apartment) }}" class="btn btn-info">Sponsorizza il tuo appartamento</a>
+
 
 
         </div>
