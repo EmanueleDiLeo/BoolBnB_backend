@@ -7,26 +7,47 @@
 
 @section('content')
     <h1 class="main__heading">SPONSOR PAGA E SORRIDI</h1>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="main__cards cards">
         <div class="cards__inner">
-            @foreach ($sponsors as $sponsor)
-                <div class="cards__card card">
-                    <h2 class="card__heading">{{ $sponsor->type }}</h2>
-                    <p class="card__price">&euro; {{ $sponsor->price }}</p>
-                    <ul role="list" class="card__bullets flow">
-                        <li>Sponsorizzazione per {{ $sponsor->duration }} ore</li>
-                    </ul>
-                    <input type="hidden" class="form-control" id="apartment" name="apartment" value="{{ $sponsor->id }}">
+            <form method="post" action="{{ route('payment.create') }}">
+                @csrf
+                @method('POST')
+                @foreach ($sponsors as $sponsor)
+                    <div class="cards__card card">
+                        <h2 class="card__heading">{{ $sponsor->type }}</h2>
+                        <p class="card__price">&euro; {{ $sponsor->price }}</p>
+                        <ul role="list" class="card__bullets flow">
+                            <li>Sponsorizzazione per {{ $sponsor->duration }} ore</li>
+                        </ul>
+                        <input type="hidden" class="form-control" id="sponsor" name="sponsor"
+                            value="{{ $sponsor->id }}">
+                        <input type="hidden" class="form-control" id="apartment" name="apartment"
+                            value="{{ $apartment->id }}">
 
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#paymentModal{{ $sponsor->id }}"
-                        class="card__cta cta generateToken">
-                        {{ $sponsor->id > 1 ? 'Acquista ' . $sponsor->type : 'Inizia con ' . $sponsor->type }}
-                    </button>
-                </div>
+                        <button value="{{ $sponsor->id }}" type="button" data-bs-toggle="modal"
+                            data-bs-target="#paymentModal" class="card__cta cta generateToken">
+                            {{ $sponsor->id > 1 ? 'Acquista ' . $sponsor->type : 'Inizia con ' . $sponsor->type }}
+                        </button>
+                    </div>
+                @endforeach
 
                 <!-- Modal -->
 
-                <form id="paymentModal{{ $sponsor->id }}" class="modal " tabindex="-1">
+
+                <!-- /Modal -->
+                <div id="paymentModal" class="modal " tabindex="-1">
+
                     <div class="modal-dialog modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -43,14 +64,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Procedi con</button>
+                                <button type="submit" class="btn btn-primary">Procedi con</button>
                             </div>
                         </div>
                     </div>
-                </form>
-
-                <!-- /Modal -->
-            @endforeach
+                </div>
+            </form>
         </div>
         <div class="overlay cards__inner"></div>
     </div>
