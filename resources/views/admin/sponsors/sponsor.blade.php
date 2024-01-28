@@ -30,17 +30,17 @@
                         <ul role="list" class="card__bullets flow">
                             <li>Sponsorizzazione per {{ $sponsor->duration }} ore</li>
                         </ul>
-                        <input type="hidden" class="form-control" id="sponsor" name="sponsor"
-                            value="{{ $sponsor->id }}">
+
                         <input type="hidden" class="form-control" id="apartment" name="apartment"
                             value="{{ $apartment->id }}">
 
-                        <button value="{{ $sponsor->id }}" type="button" data-bs-toggle="modal"
-                            data-bs-target="#paymentModal" class="card__cta cta generateToken">
+                        <button onclick="takeValue({{ $sponsor->id }})" value="{{ $sponsor->id }}" type="button"
+                            data-bs-toggle="modal" data-bs-target="#paymentModal" class="card__cta cta generateToken">
                             {{ $sponsor->id > 1 ? 'Acquista ' . $sponsor->type : 'Inizia con ' . $sponsor->type }}
                         </button>
                     </div>
                 @endforeach
+                <input type="hidden" class="form-control" id="sponsor" name="sponsor" value="">
 
                 <!-- Modal -->
 
@@ -82,11 +82,16 @@
     <script src="https://js.braintreegateway.com/web/dropin/1.35.0/js/dropin.min.js"></script>
     <script>
         var generateToken = document.getElementsByClassName("generateToken");
+        let sponsor = document.getElementById("sponsor");
         let token
         var form = document.querySelector('form');
 
+        function takeValue(value) {
+            sponsor.value = value;
+            console.log(sponsor.value);
+        }
         for (var i = 0; i < generateToken.length; i++) {
-            generateToken[i].addEventListener("click", function(i) {
+            generateToken[i].addEventListener("click", function() {
                 token = ''
                 //richiesta AJAX
                 fetch('http://127.0.0.1:8000/api/generate')

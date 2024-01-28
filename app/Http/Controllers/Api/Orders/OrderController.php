@@ -55,7 +55,6 @@ class OrderController extends Controller
 
     public function create(Request $request, Apartment $apartment)
     {
-        dd($request);
         $sponsor = Sponsor::find($request->sponsor);
         $apartment = Apartment::find($request->apartment);
         $gateway = new Gateway([
