@@ -30,6 +30,19 @@ body{
             }
         }
     }
+    .btn-edit {
+        border: 1px solid #d3bc3b;
+        background-color: #ffe54c;
+        &:hover{
+            background-color: #bba736;
+
+        }
+    }
+    .btn-show{
+        border: 1px solid #376191;
+        background-color: #4B82C0;
+        color: white;
+    }
 }
 
 .ck-editor__editable[role="textbox"] {
@@ -86,7 +99,9 @@ body{
   .aside-style{
     background-color: #3e86d8;
     width: 20%;
-
+    .fa-bars{
+        cursor: pointer;
+    }
     ul{
         list-style: none;
         li{
@@ -110,3 +125,4 @@ body{
   main{
     height: calc(100vh - 70px);
   }
+

@@ -17,7 +17,6 @@
             @csrf
             @method($method)
 
-
             {{-- appartment name------------------------------------------ --}}
             <div id="title-div" class="mb-3">
                 <label for="title" class="form-label">Nome Appartamento*</label>
@@ -30,7 +29,6 @@
             @error('title')
                 <p class="text-danger">Il nome è un campo obbligatorio</p>
             @enderror
-
             {{-- /appartment name------------------------------------------ --}}
 
             {{-- room number section--------------------------------------- --}}
@@ -42,12 +40,10 @@
                 <div id="room_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
 
-
             @error('room_number')
                 <p class="text-danger">Il numero delle stanze è un campo obbligatorio</p>
             @enderror
             {{-- /room number section--------------------------------------- --}}
-
 
             {{-- /bed number section--------------------------------------- --}}
             <div id="bed_number-div" class="mb-3">
@@ -57,7 +53,6 @@
                 <div id="bed_number-error" class="invalid-feedback">questo campo è obbligatorio</div>
                 <div id="bed_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
-
 
             @error('bed_number')
                 <p class="text-danger">Il numero dei posti letto è un campo obbligatorio</p>
@@ -74,7 +69,6 @@
                 <div id="bathroom_number-validationError" class="text-danger invalid-feedback">non può contenere numeri negativi o lettere</div>
             </div>
 
-
             @error('bathroom_number')
                 <p class="text-danger"> Il numero dei bagni è un campo obbligatorio</p>
             @enderror
@@ -89,14 +83,10 @@
                 <div id="sq_metres-validationError" class="text-danger invalid-feedback">non può contenere lettere e deve essere maggiore o uguale a 9</div>
             </div>
 
-
             @error('sq_metres')
                 <p class="text-danger">Il metraggio è un campo obbligatorio</p>
             @enderror
             {{-- /sq metres section--------------------------------------- --}}
-
-
-
 
             {{-- address section--------------------------------------- --}}
             <div class="mb-3">
@@ -117,7 +107,6 @@
                     </span>
                 @enderror
             </div>
-
 
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -168,9 +157,7 @@
                     });
                 });
             </script>
-
             {{-- /address section--------------------------------------- --}}
-
 
             {{-- image section--------------------------------------- --}}
             <div id="img-div" class="mb-3">
@@ -246,8 +233,8 @@
             {{-- /description section--------------------------------------- --}}
 
             {{-- buttons section --}}
-            <button type="submit" class="btn bg-success">{{ $button }}</button>
-            <button type="reset" class="btn bg-danger">Annulla</button>
+            <button type="submit" class="btn bg-success text-white">{{ $button }}</button>
+            <button type="reset" class="btn bg-danger text-white">Annulla</button>
             {{-- buttons section --}}
 
         </form>

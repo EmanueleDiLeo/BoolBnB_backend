@@ -12,9 +12,9 @@
                 </div>
             @endif
             @forelse ($apartments as $apartment)
-                <div class="col-4 my-3">
-                    <div class="card h-100">
-                        <div class=" card-img w-100 overflow-hidden" style="height: 220px;">
+                <div class="col-12 col-md-6 col-lg-4 my-3">
+                    <div class="card h-100 pb-2">
+                        <div class=" card-img overflow-hidden" style="height: 200px;">
                             @if (Str::contains($apartment->img, ['https://']))
                                 <img src="{{ $apartment->img }}" class="img-fluid w-100" alt="{{ $apartment->title }}">
                             @else
@@ -22,59 +22,78 @@
                                     alt="{{ $apartment->title }}">
                             @endif
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $apartment->title }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ $apartment->address }}.</h6>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="info-appartment py-1">
+                                <h5 class="card-title">{{ $apartment->title }}</h5>
+                                <h6 class="card-subtitle text-muted">{{ $apartment->address }}.</h6>
+                            </div>
+                            <div class="py-2">
+                                <span class="me-1">
+                                    <i class="fa-solid fa-door-closed" style="color: #384a9c"></i> {{ $apartment->room_number}}
+                                </span>
+                                <span class="me-1">
+                                    <i class="fa-solid fa-bath" style="color: #384a9c"></i> {{ $apartment->bathroom_number}}
+                                </span>
+                                <span class="me-1">
+                                    <i class="fa-solid fa-bed" style="color: #384a9c"></i> {{ $apartment->bed_number}}
+                                </span>
+                                <span>
+                                    <i class="fa-solid fa-ruler-combined" style="color: #384a9c"></i> {{ $apartment->sq_metres}}mq
+                                </span>
+                            </div>
 
-                            {{-- button show------------------------------- --}}
-                            <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-success">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </a>
-                            {{-- /button show------------------------------- --}}
+                            <div class="buttons-appartment my-1">
+                                {{-- button show------------------------------- --}}
+                                <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-show">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
+                                {{-- /button show------------------------------- --}}
 
-                            {{-- button edit------------------------------- --}}
-                            <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-warning">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            {{-- /button edit------------------------------- --}}
+                                {{-- button edit------------------------------- --}}
+                                <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-edit">
+                                    <i class="fa-solid fa-pencil text-white"></i>
+                                </a>
+                                {{-- /button edit------------------------------- --}}
 
-                            {{-- button delete------------------------------- --}}
-                            <form class="d-inline-block" id="deleteForm{{ $apartment->id }}"
-                                action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button
-                                    type="button"
-                                    class="btn btn-danger"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal{{ $apartment->id }}"
-                                >
-                                    <i class="fa-regular fa-trash-can"></i>
-                                </button>
-                                {{-- /button delete------------------------------- --}}
+                                {{-- button delete------------------------------- --}}
+                                <form class="d-inline-block" id="deleteForm{{ $apartment->id }}"
+                                    action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal{{ $apartment->id }}"
+                                    >
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                    {{-- /button delete------------------------------- --}}
 
-                                {{-- modale di conferma------------------------------- --}}
-                                <div class="modal" id="deleteModal{{ $apartment->id }}" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Conferma eliminazione</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Sei sicuro di voler eliminare "{{ $apartment->title }}"?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Annulla</button>
-                                                <button type="button" class="btn btn-danger"
-                                                    onclick="submitForm({{ $apartment->id }})">Elimina</button>
+                                    {{-- modale di conferma------------------------------- --}}
+                                    <div class="modal" id="deleteModal{{ $apartment->id }}" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Conferma eliminazione</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Sei sicuro di voler eliminare "{{ $apartment->title }}"?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Annulla</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="submitForm({{ $apartment->id }})">Elimina</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>
