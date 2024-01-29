@@ -15,6 +15,9 @@
                 <div class="col-12 col-md-6 col-lg-4 my-3">
                     <div class="card h-100 pb-2 position-relative ">
                         <div class=" card-img overflow-hidden" style="height: 200px;">
+                            @if (in_array($apartment->id, $ids))
+                                <img class="sponsored" src="/img/sponsored.webp" alt="">
+                            @endif
                             @if (Str::contains($apartment->img, ['https://']))
                                 <img src="{{ $apartment->img }}" class="img-fluid w-100" alt="{{ $apartment->title }}">
                             @else
@@ -29,16 +32,19 @@
                             </div>
                             <div class="py-2">
                                 <span class="me-1">
-                                    <i class="fa-solid fa-door-closed" style="color: #525664"></i> {{ $apartment->room_number}}
+                                    <i class="fa-solid fa-door-closed" style="color: #525664"></i>
+                                    {{ $apartment->room_number }}
                                 </span>
                                 <span class="me-1">
-                                    <i class="fa-solid fa-bath" style="color: #525664"></i> {{ $apartment->bathroom_number}}
+                                    <i class="fa-solid fa-bath" style="color: #525664"></i>
+                                    {{ $apartment->bathroom_number }}
                                 </span>
                                 <span class="me-1">
-                                    <i class="fa-solid fa-bed" style="color: #525664"></i> {{ $apartment->bed_number}}
+                                    <i class="fa-solid fa-bed" style="color: #525664"></i> {{ $apartment->bed_number }}
                                 </span>
                                 <span>
-                                    <i class="fa-solid fa-ruler-combined" style="color: #525664"></i> {{ $apartment->sq_metres}}mq
+                                    <i class="fa-solid fa-ruler-combined" style="color: #525664"></i>
+                                    {{ $apartment->sq_metres }}mq
                                 </span>
                             </div>
 
@@ -60,12 +66,8 @@
                                     action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a
-                                        type="button"
-                                        class="btn-delete position-absolute top-0 end-0 fs-3 "
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal{{ $apartment->id }}"
-                                    >
+                                    <a type="button" class="btn-delete position-absolute top-0 end-0 fs-3 "
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal{{ $apartment->id }}">
                                         <i class="fa-solid fa-xmark"></i>
                                     </a>
                                     {{-- /button delete------------------------------- --}}
@@ -103,8 +105,9 @@
                         document.getElementById('deleteForm' + id).submit();
                     }
                 </script>
+
             @empty
-            <h4 class="text-center w-100 text-title mb-3">Non ci sono appartamenti</h4>
+                <h4 class="text-center w-100 text-title mb-3">Non ci sono appartamenti</h4>
             @endforelse
         </div>
     </div>
