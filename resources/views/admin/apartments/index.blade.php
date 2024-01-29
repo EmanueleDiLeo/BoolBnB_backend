@@ -7,13 +7,13 @@
 
         <div class="row">
             @if (session('success'))
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success mt-3" role="alert">
                     {{ session('success') }}
                 </div>
             @endif
             @forelse ($apartments as $apartment)
                 <div class="col-12 col-md-6 col-lg-4 my-3">
-                    <div class="card h-100 pb-2">
+                    <div class="card h-100 pb-2 position-relative ">
                         <div class=" card-img overflow-hidden" style="height: 200px;">
                             @if (Str::contains($apartment->img, ['https://']))
                                 <img src="{{ $apartment->img }}" class="img-fluid w-100" alt="{{ $apartment->title }}">
@@ -29,16 +29,16 @@
                             </div>
                             <div class="py-2">
                                 <span class="me-1">
-                                    <i class="fa-solid fa-door-closed" style="color: #384a9c"></i> {{ $apartment->room_number}}
+                                    <i class="fa-solid fa-door-closed" style="color: #525664"></i> {{ $apartment->room_number}}
                                 </span>
                                 <span class="me-1">
-                                    <i class="fa-solid fa-bath" style="color: #384a9c"></i> {{ $apartment->bathroom_number}}
+                                    <i class="fa-solid fa-bath" style="color: #525664"></i> {{ $apartment->bathroom_number}}
                                 </span>
                                 <span class="me-1">
-                                    <i class="fa-solid fa-bed" style="color: #384a9c"></i> {{ $apartment->bed_number}}
+                                    <i class="fa-solid fa-bed" style="color: #525664"></i> {{ $apartment->bed_number}}
                                 </span>
                                 <span>
-                                    <i class="fa-solid fa-ruler-combined" style="color: #384a9c"></i> {{ $apartment->sq_metres}}mq
+                                    <i class="fa-solid fa-ruler-combined" style="color: #525664"></i> {{ $apartment->sq_metres}}mq
                                 </span>
                             </div>
 
@@ -60,14 +60,14 @@
                                     action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button
+                                    <a
                                         type="button"
-                                        class="btn btn-danger"
+                                        class="btn-delete position-absolute top-0 end-0 fs-3 "
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteModal{{ $apartment->id }}"
                                     >
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </a>
                                     {{-- /button delete------------------------------- --}}
 
                                     {{-- modale di conferma------------------------------- --}}
@@ -87,6 +87,7 @@
                                                         data-bs-dismiss="modal">Annulla</button>
                                                     <button type="button" class="btn btn-danger"
                                                         onclick="submitForm({{ $apartment->id }})">Elimina</button>
+
                                                 </div>
                                             </div>
                                         </div>
