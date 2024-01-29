@@ -122,6 +122,7 @@ body{
     height: calc(100vh - 70px);
   }
 
+
   :root {
     --v1: #be91c6;
     --v2: #8a65cc;
@@ -721,4 +722,11 @@ body{
 
 .welcome{
     z-index: 15;
+}
+
+//   img sponsored
+
+.sponsored {
+    width: 200px;
+    position: absolute;
 }

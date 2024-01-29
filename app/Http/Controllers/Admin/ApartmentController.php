@@ -13,6 +13,7 @@ use App\Functions\Helper;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
@@ -22,7 +23,21 @@ class ApartmentController extends Controller
     public function index()
     {
         $apartments = Apartment::where('user_id', Auth::id())->get();
-        return view('admin.apartments.index', compact('apartments'));
+        // Imposta la variabile $sql con il tuo codice SQL
+        $sql = "SELECT DISTINCT `apartment_sponsor`.`apartment_id`\n"
+            . "FROM `apartment_sponsor` \n"
+            . "WHERE `end_date` > now();";
+
+        // Esegui la query raw usando il metodo DB::select
+        $results = DB::select($sql);
+
+        // Estrai gli id degli appartamenti sponsorizzati da $results
+        $ids = array_map(function ($result) {
+            return $result->apartment_id;
+        }, $results);
+
+
+        return view('admin.apartments.index', compact('apartments', 'ids'));
     }
 
     // Custome functions
