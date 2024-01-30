@@ -11,6 +11,17 @@ header{
     }
 }
 
+.pos {
+    position: absolute;
+    top: 160px;
+    left: 10px;
+    font-size: 20px;
+    background-color: rgba(203, 203, 203, 0.748);
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 3px;
+}
+
 body{
     background-color: #ffffff;
     font-family: 'Roboto', sans-serif;
@@ -730,7 +741,6 @@ body{
     width: 200px;
     position: absolute;
 }
-
 .badge-show{
     border-radius: 10px;
     padding: 5px 10px;
@@ -744,3 +754,4 @@ body{
         color:#fa4e23;
     }
 }
+
