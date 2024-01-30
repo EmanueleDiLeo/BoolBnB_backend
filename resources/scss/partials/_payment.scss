@@ -86,7 +86,7 @@ ul {
 
 // prova pagamento html
 
-.modal-body {
+.modal-body-payment {
     background-color: #f9f9f9;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -397,9 +397,9 @@ ul {
 }
 
 /* FLIP ANIMATION */
-.container {
-    perspective: 1000px;
-}
+.container-card-payment {
+     perspective: 1000px;
+ }
 
 .creditcard {
     width: 100%;

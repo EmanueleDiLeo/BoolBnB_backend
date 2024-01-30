@@ -1,7 +1,7 @@
 <div class="payment-title">
     <h1>Inserisci metodo di pagamento</h1>
 </div>
-<div class="container preload d-flex justify-content-center">
+<div class="container container-card-payment preload d-flex justify-content-center">
     <div class="creditcard">
         <div class="front">
             <div id="ccsingle"></div>
