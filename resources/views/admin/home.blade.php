@@ -3,7 +3,9 @@
 @section('content')
 
     <div class="landscape">
-        <h1 class="welcome">Ciao {{$user->name}}</h1>
+        <div class="welcome">
+            <h1 class="welcome text-center">Ciao {{$user->name}}!</h1>
+        </div>
         <div class="mountain"></div>
         <div class="mountain mountain-2"></div>
         <div class="mountain mountain-3"></div>
