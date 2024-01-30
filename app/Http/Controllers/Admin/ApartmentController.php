@@ -55,7 +55,7 @@ class ApartmentController extends Controller
         // Custome functions
         public function messages()
         {
-            $messages = Apartment::select('messages.id')->join('messages', function ($join) {
+            $messages = Apartment::select('*')->join('messages', function ($join) {
                 $join->on('apartments.id', '=', 'messages.apartment_id');
             })->where('apartments.user_id', Auth::id())->get();
 
