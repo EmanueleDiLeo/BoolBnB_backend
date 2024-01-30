@@ -18,7 +18,7 @@
               </h2>
               <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    <span class="text-secondary">Inviato il: {{$message->sended_at}}</span>
+                    <span class="text-secondary">Inviato il: {{Helper::formatDate($message->sended_at)}}</span>
                     <p>{{ $message->text }}</p>
                 </div>
               </div>
