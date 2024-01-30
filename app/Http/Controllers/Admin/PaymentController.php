@@ -20,8 +20,8 @@ class PaymentController extends Controller
         $apartment = Apartment::find($apartment->id);
         // $response = Http::get('http://127.0.0.1:8000/api/generate');
         // $data = $response->json('results');
+        $user = Auth::user();
 
-
-        return view('admin.sponsors.sponsor', compact('sponsors', 'apartment'));
+        return view('admin.sponsors.sponsor', compact('sponsors', 'apartment', 'user'));
     }
 }
