@@ -189,6 +189,9 @@ class PageController extends Controller
     public function getSlugApartment($slug)
     {
         $apartment = Apartment::where('slug', $slug)->with('services', 'user')->first();
+        foreach ($apartment->services as $service) {
+            $service->icon = asset('icons/' . $service->icon);
+        }
 
         if ($apartment) {
             $success = true;
