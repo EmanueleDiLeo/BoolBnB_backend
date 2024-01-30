@@ -51,7 +51,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Metodo di pagamento</h5>
-                                <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#modal-payment"
+                                <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="paymentModal"
                                     aria-label="Close"></button>
                             </div>
 
