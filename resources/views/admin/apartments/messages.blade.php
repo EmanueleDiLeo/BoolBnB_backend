@@ -9,15 +9,16 @@
         @endif
 
         @forelse ($messages as $message)
-        <div class="accordion accordion-flush email-box" id="accordionFlushExample">
+        <div class="accordion accordion-flush email-box" id="accordionFlushExample{{$message->id}}">
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    <strong class="me-2">Messaggio da:</strong> {{ $message->sender_email }}
+                    <strong class="me-2">Messaggio dell'appartamento:</strong> {{ $message->title}}
                 </button>
               </h2>
               <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
+                    <span class="text-secondary">Inviato da: {{ $message->sender_email }}</span> <br />
                     <span class="text-secondary">Inviato il: {{$message->sended_at}}</span>
                     <p>{{ $message->text }}</p>
                 </div>
