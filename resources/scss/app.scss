@@ -741,3 +741,17 @@ body{
     width: 200px;
     position: absolute;
 }
+.badge-show{
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    &.public{
+        background-color:#4b4b4b8e;
+        color:#376191;
+    }
+    &.private{
+        background-color:#4b4b4b8e;
+        color:#fa4e23;
+    }
+}
+
