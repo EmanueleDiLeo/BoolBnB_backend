@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified'])
 
         // Rotta custom
         Route::get('message/{apartment}', [ApartmentController::class, 'messageApartment'])->name('message');
+        Route::get('messages', [ApartmentController::class, 'messages'])->name('messages');
     });
 
 require __DIR__ . '/auth.php';
