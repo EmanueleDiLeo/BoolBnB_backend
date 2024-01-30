@@ -21,7 +21,7 @@
     @endif
     <div class="main__cards cards">
         <div class="cards__inner">
-            <form method="post" class="d-flex " action="{{ route('payment.create') }}">
+            <form method="post" class="form-cards d-flex " action="{{ route('payment.create') }}">
                 @csrf
                 @method('POST')
                 @foreach ($sponsors as $sponsor)
@@ -51,8 +51,8 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Metodo di pagamento</h5>
-                                <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="paymentModal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-toggle="modal"
+                                    data-bs-target="paymentModal" aria-label="Close"></button>
                             </div>
 
                             {{-- payment custom --}}
@@ -63,12 +63,10 @@
                             <div class="modal-footer d-flex justify-content-between">
                                 <div class="d-flex w-75">
                                     <i class="fas fa-info-circle fa-2x"></i>
-                                    <p class=" ms-2">L'elaborazione dei pagamenti con carta di credito può richiedere fino a 24h</p>
+                                    <p class=" ms-2">L'elaborazione dei pagamenti con carta di credito può richiedere fino
+                                        a 24h</p>
                                 </div>
-                                <button
-                                    type="submit"
-                                    class="btn btn-success"
-                                >
+                                <button type="submit" class="btn btn-success">
                                     Procedi con l'aquisto
                                 </button>
                             </div>
