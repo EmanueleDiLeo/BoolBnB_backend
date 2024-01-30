@@ -47,7 +47,7 @@ class PageController extends Controller
     {
         $services = Service::all();
         foreach ($services as $service) {
-            $service->icon = asset('storage/icons/' . $service->icon);
+            $service->icon = asset('icons/' . $service->icon);
         }
         return response()->json($services);
     }
@@ -189,6 +189,9 @@ class PageController extends Controller
     public function getSlugApartment($slug)
     {
         $apartment = Apartment::where('slug', $slug)->with('services', 'user')->first();
+        foreach ($apartment->services as $service) {
+            $service->icon = asset('icons/' . $service->icon);
+        }
 
         if ($apartment) {
             $success = true;
