@@ -15,7 +15,7 @@ header{
 
 .pos {
     position: absolute;
-    top: 160px;
+    bottom: 10px;
     left: 10px;
     font-size: 20px;
     background-color: rgba(203, 203, 203, 0.748);
@@ -671,7 +671,6 @@ body{
         color:#fa4e23;
     }
 }
-
 .email-box{
     border-block: 1px solid rgba(41, 120, 139, 0.74);
     padding: 5px;
@@ -681,10 +680,9 @@ body{
     display: inline-block;
     background-color: #3e86d8a9;
     color: white;
-    line-height: 100%;
+    line-height: 35px;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+
 }
-
-

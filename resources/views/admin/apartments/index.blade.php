@@ -14,23 +14,23 @@
             @forelse ($apartments as $apartment)
                 <div class="col-12 col-md-6 col-lg-4 my-3">
                     <div class="card h-100 pb-2 position-relative ">
-                        <div class=" card-img overflow-hidden" style="height: 200px;">
+                        <div class=" card-img overflow-hidden position-relative" style="height: 200px;">
                             @if (in_array($apartment->id, $ids))
                                 <img class="sponsored" src="/img/sponsored.webp" alt="">
                             @endif
                             @if (Str::contains($apartment->img, ['https://']))
-                                <img src="{{ $apartment->img }}" class="img-fluid w-100" alt="{{ $apartment->title }}">
+                                <img src="{{ $apartment->img }}" class="img-fluid h-100 w-100" alt="{{ $apartment->title }}">
                             @else
-                                <img src="{{ asset('storage/' . $apartment->img) }}" class="img-fluid w-100"
+                                <img src="{{ asset('storage/' . $apartment->img) }}" class="img-fluid h-100 w-100"
                                     alt="{{ $apartment->title }}">
                             @endif
-                        </div>
-
                             @if ($apartment->visible === 1)
                                 <p><i class="fa-solid fa-eye text-success pos"></i></p>
                             @else
                                 <p><i class="fa-solid fa-eye-slash text-danger pos"></i></p>
                             @endif
+                        </div>
+
 
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div class="info-appartment py-1">
