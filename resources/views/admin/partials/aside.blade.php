@@ -15,6 +15,10 @@
             <a href="{{ route('admin.apartments.create') }}" @class(['active' => Route::is('admin.apartments.create')])>Aggiungi Appartamento
             </a>
         </li>
+        <li class="my-3">
+            <a href="{{ route('admin.messages') }}" @class(['active' => Route::is('admin.messages')])>Messaggi Ricevuti
+            </a>
+        </li>
     </ul>
 </aside>
 
