@@ -25,6 +25,13 @@
                                     alt="{{ $apartment->title }}">
                             @endif
                         </div>
+
+                            @if ($apartment->visible === 1)
+                                <p><i class="fa-solid fa-eye text-success pos"></i></p>
+                            @else
+                                <p><i class="fa-solid fa-eye-slash text-danger pos"></i></p>
+                            @endif
+
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div class="info-appartment py-1">
                                 <h5 class="card-title">{{ $apartment->title }}</h5>
