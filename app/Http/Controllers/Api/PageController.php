@@ -47,7 +47,7 @@ class PageController extends Controller
     {
         $services = Service::all();
         foreach ($services as $service) {
-            $service->icon = asset('storage/icons/' . $service->icon);
+            $service->icon = asset('icons/' . $service->icon);
         }
         return response()->json($services);
     }
