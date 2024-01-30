@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -50,6 +51,20 @@ class ApartmentController extends Controller
         $messages = Message::where('apartment_id', $apartment->id)->orderBy('created_at', 'DESC')->get();
         return view('admin.apartments.message', compact('messages', 'number_messages'));
     }
+
+        // Custome functions
+        public function messages()
+        {
+            $messages = Apartment::select('messages.id')->join('messages', function ($join) {
+                $join->on('apartments.id', '=', 'messages.apartment_id');
+            })->where('apartments.user_id', Auth::id())->get();
+
+            $number_messages = Apartment::select('messages.id')->join('messages', function ($join) {
+                $join->on('apartments.id', '=', 'messages.apartment_id');
+            })->where('apartments.user_id', Auth::id())->count();
+
+            return view('admin.apartments.messages', compact('messages', 'number_messages'));
+        }
 
 
     /**
