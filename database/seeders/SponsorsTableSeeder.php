@@ -15,19 +15,19 @@ class SponsorsTableSeeder extends Seeder
     {
         $sponsors = [
             [
-                'type' => 'bronze',
+                'type' => 'Lite',
                 'duration' => 24,
                 'price' => 2.99,
 
             ],
             [
-                'type' => 'silver',
+                'type' => 'Plus',
                 'duration' => 72,
                 'price' => 5.99,
             ],
 
             [
-                'type' => 'gold',
+                'type' => 'Premium',
                 'duration' => 144,
                 'price' => 9.99,
             ],
