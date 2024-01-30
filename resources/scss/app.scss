@@ -1,5 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
-@import 'resources/scss/partials/payment.scss';
+@import 'resources/scss/partials/_payment.scss';
 
 
 header{
@@ -93,11 +93,6 @@ body{
 
 }
 
-//   /* IMAGE STYLES */
-//   [type=radio] + img {
-//     cursor: pointer;
-//   }
-
   /* CHECKED STYLES */
   [type=radio]:checked + img {
     outline: 2px solid #f00;
@@ -132,7 +127,6 @@ body{
   main{
     height: calc(100vh - 70px);
   }
-
 
   :root {
     --v1: #be91c6;
@@ -623,8 +617,6 @@ body{
     width: 200px;
     position: absolute;
 }
- payment-card
-=======
 
 // .badge-show{
 //     border-radius: 10px;
