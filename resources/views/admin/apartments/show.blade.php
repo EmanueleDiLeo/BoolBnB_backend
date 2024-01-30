@@ -27,7 +27,7 @@ $formattedDate = $date->format('M d, Y H:i:s');
                 <div class="position-absolute top-0 end-0 p-2">
                     {{-- button edit------------------------------- --}}
                     <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-edit">
-                        <i class="fa-solid fa-pencil"></i>
+                        <i class="fa-solid fa-pencil text-white "></i>
                     </a>
                     {{-- /button edit------------------------------- --}}
                     {{-- button delete------------------------------- --}}

@@ -652,40 +652,39 @@ body{
     }
 }
 
-//   img sponsored
 
 .sponsored {
     width: 200px;
     position: absolute;
 }
 
-// .badge-show{
-//     border-radius: 10px;
-//     padding: 5px 10px;
-//     color: white;
-//     &.public{
-//         background-color:#4b4b4b8e;
-//         color:#376191;
-//     }
-//     &.private{
-//         background-color:#4b4b4b8e;
-//         color:#fa4e23;
-//     }
-// }
+.badge-show{
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    &.public{
+        background-color:#4b4b4b8e;
+        color:#376191;
+    }
+    &.private{
+        background-color:#4b4b4b8e;
+        color:#fa4e23;
+    }
+}
 
-// .email-box{
-//     border-block: 1px solid rgba(41, 120, 139, 0.74);
-//     padding: 5px;
-// }
+.email-box{
+    border-block: 1px solid rgba(41, 120, 139, 0.74);
+    padding: 5px;
+}
 
-// .number-email{
-//     display: inline-block;
-//     background-color: #3e86d8a9;
-//     color: white;
-//     line-height: 100%;
-//     border-radius: 50%;
-//     width: 30px;
-//     height: 30px;
-// }
+.number-email{
+    display: inline-block;
+    background-color: #3e86d8a9;
+    color: white;
+    line-height: 100%;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
 
 
