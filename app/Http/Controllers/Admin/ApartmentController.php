@@ -41,23 +41,23 @@ class ApartmentController extends Controller
         return view('admin.apartments.index', compact('apartments', 'ids'));
     }
 
-    // Custome functions
+    // Custom functions
     public function messageApartment(Apartment $apartment)
     {
         if ($apartment->user_id !== Auth::id()) {
             abort('404');
         };
         $number_messages = Message::where('apartment_id', $apartment->id)->count();
-        $messages = Message::where('apartment_id', $apartment->id)->orderBy('created_at', 'DESC')->get();
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('sended_at', 'DESC')->get();
         return view('admin.apartments.message', compact('messages', 'number_messages'));
     }
 
-        // Custome functions
+        // Custom functions
         public function messages()
         {
             $messages = Apartment::select('*')->join('messages', function ($join) {
                 $join->on('apartments.id', '=', 'messages.apartment_id');
-            })->where('apartments.user_id', Auth::id())->get();
+            })->where('apartments.user_id', Auth::id())->orderBy('sended_at', 'DESC')->get();
 
             $number_messages = Apartment::select('messages.id')->join('messages', function ($join) {
                 $join->on('apartments.id', '=', 'messages.apartment_id');
