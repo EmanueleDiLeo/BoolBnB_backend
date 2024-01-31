@@ -95,7 +95,7 @@
                     value="{{ old('address', $address) }}" class="@error('address') is-invalid @enderror form-control"
                     required minlength="3">
 
-                <div id="address-results" class="bg-white  px-3">
+                <div id="address-results" class="bg-white d-none px-3">
                     <!--inserimento risultati in tempo reale-->
                 </div>
 
@@ -129,8 +129,8 @@
                                 if (data.results && data.results.length > 0) {
                                     data.results.forEach(result => {
                                         let resultItem = document.createElement('div');
-                                        resultItem.textContent = result.address
-                                            .freeformAddress; //mostra il risultato
+                                        resultsContainer.classList.remove('d-none');
+                                        resultItem.textContent = result.address.freeformAddress; //mostra il risultato
                                         resultItem.classList.add('address-result-item');
                                         resultsContainer.appendChild(resultItem);
                                     });
@@ -140,7 +140,8 @@
                                 } else {
                                     errorContainer.textContent =
                                         'Nessun risultato trovato. Inserisci un indirizzo valido.';
-                                    button.disabled = true
+                                    button.disabled = true;
+                                    resultsContainer.classList.remove('d-none');
                                 }
                             });
                     });
@@ -152,6 +153,7 @@
                             addressInput.value = selectedAddress;
                             addressInput.focus(); //focus su input
                             resultsContainer.innerHTML = ''; //svuoto i risultati proposti
+                            resultsContainer.classList.add('d-none');
                             document.activeElement.blur(); //simula il click fuori dall'area dei risultati
                         }
                     });
