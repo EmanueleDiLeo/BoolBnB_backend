@@ -101,7 +101,7 @@ class OrderController extends Controller
                 ]);
                 return redirect()->route('selectPayment', $apartment)->with('success',  'Sponsorizzazione aumentata con successo!');
             }
-        } else {
+        } else if (!$result->success) {
             return back()->with('error', 'Pagamento fallito, prova di nuovo.');
         }
     }
