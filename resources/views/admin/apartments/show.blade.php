@@ -20,7 +20,7 @@ $formattedDate = $date->format('M d, Y H:i:s');
                 @if (Str::contains($apartment->img, ['https://']))
                     <img src="{{ $apartment->img }}" alt="{{ $apartment->title }}" class="card-img-top">
                 @else
-                    <img src="{{ asset('storage/' . $apartment->img) }}" alt="{{ $apartment->title }}" class="card-img-top">
+                    <img src="{{ asset('storage/' . $apartment->img) }}" alt="{{ $apartment->title }}" class="card-img-top ratio-16x9">
                 @endif
 
                 {{-- bottoni --}}
@@ -42,20 +42,6 @@ $formattedDate = $date->format('M d, Y H:i:s');
                     {{-- /button delete------------------------------- --}}
                 </div>
               {{-- /bottoni --}}
-
-              {{-- pubblico/privato --}}
-              <div class="position-absolute bottom-0 end-0 p-2">
-                  @if ($apartment->visible === 1)
-                  <span class="badge-show public">
-                    <i class="fa-solid fa-eye"></i>
-                  </span>
-                  @else
-                  <span class="badge-show private">
-                    <i class="fa-solid fa-eye-slash"></i>
-                  </span>
-                  @endif
-              </div>
-              {{-- pubblico/privato --}}
             </div>
             {{-- /sezione immagine --}}
         </div>
@@ -100,13 +86,31 @@ $formattedDate = $date->format('M d, Y H:i:s');
                     @forelse ($apartment->services as $service)
                         <div class="col-6">
                             <img src="{{asset('icons/' . $service->icon)}}" alt="{{ $service->name }}" style="width: 50px">
-                            <span>{{ $service->name }}</span>
+                            <span class="d-block d-md-inline-block">{{ $service->name }}</span>
                         </div>
                     @empty
                         <li>Nessun Servizio</li>
                     @endforelse
                 </div>
                 {{-- /servizi appartamento --}}
+
+
+                {{-- pubblico/privato --}}
+                <div>
+                    <h5 class="pt-4">Pubblico/Privato</h5>
+                    @if ($apartment->visible === 1)
+                    <span class="badge-show public">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Pubblico</span>
+                    </span>
+                    @else
+                    <span class="badge-show private">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <span>Privato</span>
+                    </span>
+                    @endif
+                </div>
+                {{-- pubblico/privato --}}
 
                  {{-- sponsorizzazione --}}
                 <div class="timer-sponsorship pt-4">
@@ -167,7 +171,8 @@ $formattedDate = $date->format('M d, Y H:i:s');
                     <p class="text-secondary">Nessuna descrizione</p>
                 @endif
                 <a href="{{ route('admin.message', $apartment) }}" class="btn btn-success">
-                    <i class="fa-solid fa-circle-info"> Messaggi</i>
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span class="">Messaggi</span>
                 </a>
             </div>
         </section>

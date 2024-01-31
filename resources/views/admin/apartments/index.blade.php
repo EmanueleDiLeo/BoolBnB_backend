@@ -1,9 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="container position-relative">
         <h1 class="text-center w-100 text-title mb-3">I Tuoi Appartamenti</h1>
-        <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">Aggiungi un appartamento</a>
+        <a href="{{ route('admin.apartments.create') }}" class="btn btn-success d-flex d-md-inline-block justify-content-center">
+           <span class="d-none d-md-block">Aggiungi appartamento</span>
+           <span class="d-md-none"><i class="fa-solid fa-plus text-white"></i></span>
+        </a>
 
         <div class="row">
             @if (session('success'))
@@ -114,7 +117,7 @@
                 </script>
 
             @empty
-                <h4 class="text-center w-100 text-title mb-3">Non ci sono appartamenti</h4>
+                <h4 class="text-center w-100 text-title mt-4 text-secondary">Purtroppo non abbiamo trovato appartamenti.</h4>
             @endforelse
         </div>
     </div>

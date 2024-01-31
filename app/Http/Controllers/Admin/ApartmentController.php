@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class ApartmentController extends Controller
 {
@@ -31,14 +32,14 @@ class ApartmentController extends Controller
 
         // Esegui la query raw usando il metodo DB::select
         $results = DB::select($sql);
-
+        $user = Auth::user();
         // Estrai gli id degli appartamenti sponsorizzati da $results
         $ids = array_map(function ($result) {
             return $result->apartment_id;
         }, $results);
 
 
-        return view('admin.apartments.index', compact('apartments', 'ids'));
+        return view('admin.apartments.index', compact('apartments', 'ids', 'user'));
     }
 
     // Custom functions
@@ -47,9 +48,10 @@ class ApartmentController extends Controller
         if ($apartment->user_id !== Auth::id()) {
             abort('404');
         };
+        $user = Auth::user();
         $number_messages = Message::where('apartment_id', $apartment->id)->count();
         $messages = Message::where('apartment_id', $apartment->id)->orderBy('sended_at', 'DESC')->get();
-        return view('admin.apartments.message', compact('messages', 'number_messages'));
+        return view('admin.apartments.message', compact('messages', 'number_messages','user'));
     }
 
         // Custom functions
@@ -63,7 +65,9 @@ class ApartmentController extends Controller
                 $join->on('apartments.id', '=', 'messages.apartment_id');
             })->where('apartments.user_id', Auth::id())->count();
 
-            return view('admin.apartments.messages', compact('messages', 'number_messages'));
+            $user = Auth::user();
+
+            return view('admin.apartments.messages', compact('messages', 'number_messages', 'user'));
         }
 
 
@@ -84,7 +88,9 @@ class ApartmentController extends Controller
         $text = 'text-danger';
         $required = 'required';
         $active_services = 0;
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'address', 'visible', 'text', 'required', 'active_services'));
+        $user = Auth::user();
+
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'address', 'visible', 'text', 'required', 'active_services', 'user'));
     }
 
     /**
@@ -137,6 +143,8 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $user = Auth::user();
+
         if ($apartment->user_id !== Auth::id()) {
             abort('404');
         };
@@ -152,7 +160,7 @@ class ApartmentController extends Controller
 
 
 
-        return view('admin.apartments.show', compact('apartment', 'max_date'));
+        return view('admin.apartments.show', compact('apartment', 'max_date', 'user'));
     }
 
     /**
@@ -174,7 +182,9 @@ class ApartmentController extends Controller
         $required = '';
         $active_services = $apartment->services->count();
         $services = Service::all();
-        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'address', 'visible', 'text', 'required', 'active_services'));
+        $user = Auth::user();
+
+        return view('admin.apartments.create-edit', compact('title', 'method', 'route', 'button', 'services', 'apartment', 'address', 'visible', 'text', 'required', 'active_services','user'));
     }
 
     /**
@@ -241,6 +251,7 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+
         if ($apartment->img) {
             Storage::disk('public')->delete($apartment->img);
         }

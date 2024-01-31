@@ -27,7 +27,7 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
 
     <main class="main-wrapper d-flex">
         @include('admin.partials.aside')
-        <div class="p-5 overflow-auto w-100 bg-color">
+        <div class="p-2 overflow-auto w-100 bg-color">
             @yield('content')
         </div>
 

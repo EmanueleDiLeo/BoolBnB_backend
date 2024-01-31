@@ -1,4 +1,6 @@
-<aside class="aside-style h-100">
+
+<aside class="aside-style h-100 d-none d-md-block">
+
 
     <div class="d-flex w-100 justify-content-center mt-3">
         <a class="d-md-none text-white text-center fs-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
@@ -7,7 +9,6 @@
         </a>
 
     </div>
-
 
     <div class="offcanvas d-md-none offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
@@ -34,8 +35,7 @@
             </ul>
         </div>
     </div>
-
-
+    
     <ul id="link-menu" class="text-start py-3 px-4 d-none d-md-block">
         <li class="my-3">
             <a href="{{ route('admin.home') }}" @class(['active' => Route::is('admin.home')])>
