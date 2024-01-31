@@ -15,7 +15,9 @@
                     <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     <div class="text-white">
                         <i class="fa-solid fa-user"></i>
-                        <span>{{$user->name}}</span>
+
+                        <span>{{Auth::user()->name}}</span>
+
                     </div>
                     <form action="{{ route('logout') }}" class="d-flex" role="search" method="POST">
                         @csrf

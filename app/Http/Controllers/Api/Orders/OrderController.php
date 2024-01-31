@@ -70,7 +70,6 @@ class OrderController extends Controller
             'paymentMethodNonce' => 'fake-valid-nonce',
             'options' => ['submitForSettlement' => true],
         ]);
-        if ($result->success) {
 
             $check_exist = Apartment::join('apartment_sponsor', function ($join) {
                 $join->on('apartments.id', '=', 'apartment_sponsor.apartment_id');
@@ -99,10 +98,8 @@ class OrderController extends Controller
                     'apartment_id' => $apartment->id,
                     'sponsor_id' => $sponsor->id
                 ]);
-                return redirect()->route('selectPayment', $apartment)->with('success',  'Sponsorizzazione aumentata con successo!');
+                return redirect()->route('selectPayment', $apartment)->with('success',  'Sponsorizzazione acquistata con successo!');
             }
-        } else if (!$result->success) {
-            return back()->with('error', 'Pagamento fallito, prova di nuovo.');
-        }
+
     }
 }
