@@ -51,7 +51,7 @@ class ApartmentController extends Controller
         $user = Auth::user();
         $number_messages = Message::where('apartment_id', $apartment->id)->count();
         $messages = Message::where('apartment_id', $apartment->id)->orderBy('sended_at', 'DESC')->get();
-        return view('admin.apartments.message', compact('messages', 'number_messages','user'));
+        return view('admin.apartments.message', compact('messages', 'number_messages','user', 'apartment'));
     }
 
         // Custom functions

@@ -38,7 +38,7 @@
 
                         <button onclick="takeValue({{ $sponsor->id }})" value="{{ $sponsor->id }}" type="button"
                             data-bs-toggle="modal" data-bs-target="#paymentModal" class="cta generateToken">
-                            {{ $sponsor->id > 1 ? 'Acquista ' . $sponsor->type : 'Inizia con ' . $sponsor->type }}
+                            Acquista {{$sponsor->type }}
                         </button>
                     </div>
                 @endforeach
