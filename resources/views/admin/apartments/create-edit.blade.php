@@ -189,19 +189,21 @@
             {{-- visible and checkbox services section--------------------------------------- --}}
 
             <div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
-                <div class="customCheckBoxHolder">
+                <div class="customCheckBoxHolder row">
                     @foreach ($services as $service)
-                    <input type="checkbox" id="service_{{ $service->id }}" class="form-check-input ciao"
-                    name="services[]" value="{{ $service->id }} "
-                            @if (
-                                (!$errors->any() && $apartment?->services->contains($service)) ||
-                                    ($errors->any() && in_array($service->id, old('services', [])))) checked @endif {{ $required }}>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <input type="checkbox" id="service_{{ $service->id }}" class="form-check-input ciao"
+                        name="services[]" value="{{ $service->id }} "
+                                @if (
+                                    (!$errors->any() && $apartment?->services->contains($service)) ||
+                                        ($errors->any() && in_array($service->id, old('services', [])))) checked @endif {{ $required }}>
 
                         <label for="service_{{ $service->id }}" class="customCheckBoxWrapper ciao {{ $text }}">
                             <div class="customCheckBox">
                                 <div class="inner">{{ $service->name }}</div>
                             </div>
                         </label>
+                    </div>
                         @endforeach
                 </div>
             </div>
@@ -210,8 +212,8 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="visible" id="visible" value="1"
                         @if ($visible == 1) checked @endif>
-                    <label class="form-check-label text-black" for="visible">
-                        Seleziona questa casella per rendere pubblico l'appartamento
+                    <label class="form-check-label text-secondary" for="visible">
+                        Rendi pubblico
                     </label>
                 </div>
             </div>
@@ -224,11 +226,11 @@
                 <textarea class="form-control" placeholder="Descrizione" id="description" name="description">
                     {{ old('description', $apartment?->description) }}</textarea>
                 <label class="form-label" for="description">
-                    descrizione
                 </label>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
+                <span class="text-secondary d-block">*Campi obbligatori</span>
             </div>
             {{-- /description section--------------------------------------- --}}
 
@@ -236,7 +238,6 @@
             <button type="submit" class="btn bg-success text-white">{{ $button }}</button>
             <button type="reset" class="btn bg-danger text-white">Annulla</button>
             {{-- buttons section --}}
-
         </form>
     </div>
 

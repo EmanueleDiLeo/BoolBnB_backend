@@ -634,9 +634,9 @@ body{
         text-align: center;
         letter-spacing: 0.2em;
         animation: flicker 0.5s ease-in-out infinite alternate;
+        margin-top: 60px;
 
         @media (max-width: 768px) {
-            margin-top: 50px;
             font-size: 1.3em;
         }
 
