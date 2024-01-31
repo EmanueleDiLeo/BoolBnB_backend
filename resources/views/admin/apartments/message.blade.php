@@ -13,7 +13,9 @@
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{ $message->id }}" aria-expanded="false" aria-controls="flush-collapseOne">
-                    <strong class="me-2">Messaggio da:</strong> {{ $message->sender_email }}
+                    <i class="fa-solid fa-envelope text-primary me-2">
+                    <strong class="me-2 d-none d-md-block"></i>Messaggio dell'appartamento:</strong>
+                    {{ $message->sender_email }}
                 </button>
               </h2>
               <div id="flush-collapseOne{{ $message->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
