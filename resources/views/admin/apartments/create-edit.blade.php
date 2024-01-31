@@ -95,7 +95,7 @@
                     value="{{ old('address', $address) }}" class="@error('address') is-invalid @enderror form-control"
                     required minlength="3">
 
-                <div id="address-results" class="bg-white px-3">
+                <div id="address-results" class="bg-white  px-3">
                     <!--inserimento risultati in tempo reale-->
                 </div>
 
