@@ -55,6 +55,7 @@ class OrderController extends Controller
 
     public function create(Request $request, Apartment $apartment)
     {
+        $timeLocal= 'GMT+2';
         $sponsor = Sponsor::find($request->sponsor);
         $apartment = Apartment::find($request->apartment);
         $gateway = new Gateway([
@@ -77,10 +78,10 @@ class OrderController extends Controller
                 ->where('id', $apartment->id)
                 ->max('end_date');
 
-            $now = Carbon::now('GMT+1');
+            $now = Carbon::now($timeLocal);
             $new_date = Carbon::createFromFormat('Y-m-d H:i:s', $now, 'Europe/Rome');
 
-            if ($check_exist == null) {
+            if ($check_exist == null || $check_exist < Carbon::now($timeLocal)) {
                 $end_date = $new_date->addHours($sponsor->duration);
                 $apartment->sponsors()->attach($sponsor, [
                     'end_date' => $end_date,
@@ -90,7 +91,7 @@ class OrderController extends Controller
 
 
                 return redirect()->route('selectPayment', $apartment)->with('success',  ' Pagamento riuscito');
-            } elseif ($check_exist > Carbon::now('GMT+1')) {
+            } elseif ($check_exist > Carbon::now($timeLocal)) {
                 $check_exist = Carbon::createFromFormat('Y-m-d H:i:s', $check_exist, 'Europe/Rome');
                 $end_date = $check_exist->addHours($sponsor->duration);
                 $apartment->sponsors()->attach($sponsor, [
